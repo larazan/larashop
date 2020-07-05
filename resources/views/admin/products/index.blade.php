@@ -49,9 +49,6 @@
                         </table>
                         {{ $products->links() }}
                     </div>
-                    <div class="card-footer text-right">
-                            <a href="{{ url('admin/products/create') }}" class="btn btn-primary">Add New</a>
-                        </div>
                     @can('add_products')
                         <div class="card-footer text-right">
                             <a href="{{ url('admin/products/create') }}" class="btn btn-primary">Add New</a>

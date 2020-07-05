@@ -20,9 +20,13 @@ use Str;
 use Auth;
 use DB;
 use Session;
+use App\Authorizable;
+
 
 class ProductController extends Controller
 {
+	use Authorizable;
+
     /**
      * Display a listing of the resource.
      *
@@ -30,7 +34,7 @@ class ProductController extends Controller
      */
     public function __construct()
 	{
-		// parent::__construct();
+		parent::__construct();
 
 		$this->data['currentAdminMenu'] = 'catalog';
 		$this->data['currentAdminSubMenu'] = 'product';
@@ -234,7 +238,8 @@ class ProductController extends Controller
 			return redirect('admin/products/create');
         }
         
-        $product = Product::findOrFail($id);
+		$product = Product::findOrFail($id);
+		$product->qty = isset($product->productInventory) ? $product->productInventory->qty : null;
 
         $categories = Category::orderBy('name', 'ASC')->get();
 

@@ -6,9 +6,12 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+use Spatie\Permission\Traits\HasRoles;
+
 class User extends Authenticatable
 {
     use Notifiable;
+    use HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -16,7 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'first_name', 'last_name', 'email', 'phone', 'password', 'company', 'address1', 'address2', 'province_id', 'city_id', 'postcode',
     ];
 
     /**
@@ -37,9 +40,23 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-
+    /**
+	 * Define relationship with the Product
+	 *
+	 * @return void
+	 */
     public function products()
 	{
 		return $this->hasMany('App\Models\Product');
+    }
+    
+    /**
+	 * Define relationship with the Favorite
+	 *
+	 * @return void
+	 */
+	public function favorites()
+	{
+		return $this->hasMany('App\Models\Favorite');
 	}
 }

@@ -11,13 +11,15 @@ use App\Models\Attribute;
 use App\Models\AttributeOption;
 
 use Session;
+use App\Authorizable;
 
 class AttributeController extends Controller
 {
+    use Authorizable;
 
     public function __construct()
     {
-        // parent::__construct();
+        parent::__construct();
 
         $this->data['currentAdminMenu'] = 'catalog';
         $this->data['currentAdminSubMenu'] = 'attribute';
