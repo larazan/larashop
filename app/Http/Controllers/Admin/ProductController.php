@@ -13,6 +13,7 @@ use App\Models\Category;
 use App\Models\Productimage;
 use App\Models\Attribute;
 use App\Models\AttributeOption;
+use App\Models\ProductAttributeValue;
 use App\Models\ProductInventory;
 
 
@@ -290,7 +291,30 @@ class ProductController extends Controller
 		}
 
 		return redirect('admin/products');
-    }
+	}
+	
+	/**
+	 * Product variants
+	 *
+	 * @param array $params params
+	 *
+	 * @return void
+	 */
+	private function _updateProductVariants($params)
+	{
+		if ($params['variants']) {
+			foreach ($params['variants'] as $productParams) {
+				$product = Product::find($productParams['id']);
+				$product->update($productParams);
+
+				$product->status = $params['status'];
+				$product->save();
+				
+				ProductInventory::updateOrCreate(['product_id' => $product->id], ['qty' => $productParams['qty']]);
+			}
+		}
+	}
+
 
     /**
      * Remove the specified resource from storage.
@@ -346,19 +370,21 @@ class ProductController extends Controller
 			$name = $product->slug . '_' . time();
 			$fileName = $name . '.' . $image->getClientOriginalExtension();
 
-			$folder = '/uploads/images'; //ProductImage::UPLOAD_DIR. '/images';
+			$folder = ProductImage::UPLOAD_DIR. '/images';
 
 			$filePath = $image->storeAs($folder, $fileName, 'public');
 
-			// $resizedImage = $this->_resizeImage($image, $fileName, $folder);
+			$resizedImage = $this->_resizeImage($image, $fileName, $folder);
 
-			// $params = array_merge(
-			// 	[
-			// 		'product_id' => $product->id,
-			// 		'path' => $filePath,
-			// 	],
-			// 	$resizedImage
-            // );
+			$params = array_merge(
+				[
+					'product_id' => $product->id,
+					'path' => $filePath,
+				],
+				$resizedImage
+			);
+			
+			// dd($params);
             
             $params = [
                 'product_id' => $product->id,
@@ -373,7 +399,59 @@ class ProductController extends Controller
 
 			return redirect('admin/products/' . $id . '/images');
 		}
-    }
+	}
+	
+	/**
+	 * Resize image
+	 *
+	 * @param file   $image    raw file
+	 * @param string $fileName image file name
+	 * @param string $folder   folder name
+	 *
+	 * @return Response
+	 */
+	private function _resizeImage($image, $fileName, $folder)
+	{
+		$resizedImage = [];
+
+		$smallImageFilePath = $folder . '/small/' . $fileName;
+		$size = explode('x', ProductImage::SMALL);
+		list($width, $height) = $size;
+
+		$smallImageFile = \Image::make($image)->fit($width, $height)->stream();
+		if (\Storage::put('public/' . $smallImageFilePath, $smallImageFile)) {
+			$resizedImage['small'] = $smallImageFilePath;
+		}
+		
+		$mediumImageFilePath = $folder . '/medium/' . $fileName;
+		$size = explode('x', ProductImage::MEDIUM);
+		list($width, $height) = $size;
+
+		$mediumImageFile = \Image::make($image)->fit($width, $height)->stream();
+		if (\Storage::put('public/' . $mediumImageFilePath, $mediumImageFile)) {
+			$resizedImage['medium'] = $mediumImageFilePath;
+		}
+
+		$largeImageFilePath = $folder . '/large/' . $fileName;
+		$size = explode('x', ProductImage::LARGE);
+		list($width, $height) = $size;
+
+		$largeImageFile = \Image::make($image)->fit($width, $height)->stream();
+		if (\Storage::put('public/' . $largeImageFilePath, $largeImageFile)) {
+			$resizedImage['large'] = $largeImageFilePath;
+		}
+
+		$extraLargeImageFilePath  = $folder . '/xlarge/' . $fileName;
+		$size = explode('x', ProductImage::EXTRA_LARGE);
+		list($width, $height) = $size;
+
+		$extraLargeImageFile = \Image::make($image)->fit($width, $height)->stream();
+		if (\Storage::put('public/' . $extraLargeImageFilePath, $extraLargeImageFile)) {
+			$resizedImage['extra_large'] = $extraLargeImageFilePath;
+		}
+
+		return $resizedImage;
+	}
 
     public function remove_image($id)
 	{

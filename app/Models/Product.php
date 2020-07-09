@@ -174,24 +174,24 @@ class Product extends Model
 	 *
 	 * @return Eloquent
 	 */
-	// public function scopePopular($query, $limit = 10)
-	// {
-	// 	$month = now()->format('m');
+	public function scopePopular($query, $limit = 10)
+	{
+		$month = now()->format('m');
 
-	// 	return $query->selectRaw('products.*, COUNT(order_items.id) as total_sold')
-	// 		->join('order_items', 'order_items.product_id', '=', 'products.id')
-	// 		->join('orders', 'order_items.order_id', '=', 'orders.id')
-	// 		->whereRaw(
-	// 			'orders.status = :order_satus AND MONTH(orders.order_date) = :month',
-	// 			[
-	// 				'order_status' => Order::COMPLETED,
-	// 				'month' => $month
-	// 			]
-	// 		)
-	// 		->groupBy('products.id')
-	// 		->orderByRaw('total_sold DESC')
-	// 		->limit($limit);
-	// }
+		return $query->selectRaw('products.*, COUNT(order_items.id) as total_sold')
+			->join('order_items', 'order_items.product_id', '=', 'products.id')
+			->join('orders', 'order_items.order_id', '=', 'orders.id')
+			->whereRaw(
+				'orders.status = :order_satus AND MONTH(orders.order_date) = :month',
+				[
+					'order_status' => Order::COMPLETED,
+					'month' => $month
+				]
+			)
+			->groupBy('products.id')
+			->orderByRaw('total_sold DESC')
+			->limit($limit);
+	}
 
 	/**
 	 * Get price label

@@ -34,6 +34,8 @@ Route::get('payments/completed', 'PaymentController@completed');
 Route::get('payments/failed', 'PaymentController@failed');
 Route::get('payments/unfinish', 'PaymentController@unfinish');
 
+Route::resource('favorites', 'FavoriteController');
+
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['auth']], function () {
   Route::get('dashboard', 'DashboardController@index');
   Route::resource('categories', 'CategoryController');
@@ -54,6 +56,24 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
 
   Route::resource('roles', 'RoleController');
   Route::resource('users', 'UserController');
+
+  Route::get('orders/trashed', 'OrderController@trashed');
+  Route::get('orders/restore/{orderID}', 'OrderController@restore');
+  Route::resource('orders', 'OrderController');
+  Route::get('orders/{orderID}/cancel', 'OrderController@cancel');
+  Route::put('orders/cancel/{orderID}', 'OrderController@doCancel');
+  Route::post('orders/complete/{orderID}', 'OrderController@doComplete');
+
+  Route::resource('shipments', 'ShipmentController');
+
+  Route::resource('slides', 'SlideController');
+  Route::get('slides/{slideID}/up', 'SlideController@moveUp');
+  Route::get('slides/{slideID}/down', 'SlideController@moveDown');
+
+  Route::get('reports/revenue', 'ReportController@revenue');
+  Route::get('reports/product', 'ReportController@product');
+  Route::get('reports/inventory', 'ReportController@inventory');
+  Route::get('reports/payment', 'ReportController@payment');
 });
 
 Auth::routes();

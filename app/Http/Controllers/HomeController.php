@@ -22,7 +22,13 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {
-        return $this->loadTheme('home');
-    }
+	{
+		$products = Product::popular()->get();
+		$this->data['products'] = $products;
+
+		// $slides = Slide::active()->orderBy('position', 'ASC')->get();
+		// $this->data['slides'] = $slides;
+
+		return $this->loadTheme('home', $this->data);
+	}
 }
