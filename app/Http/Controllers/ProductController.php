@@ -11,9 +11,25 @@ use App\Models\Category;
 
 use Str;
 
+/**
+ * ProductController
+ *
+ * PHP version 7
+ *
+ * @category ProductController
+ * @package  ProductController
+ * @author   Sugiarto <sugiarto.dlingo@gmail.com>
+ * @license  https://opensource.org/licenses/MIT MIT License
+ * @link     http://localhost/
+ */
 class ProductController extends Controller
 {
-    public function __construct()
+	/**
+	 * Create a new controller instance.
+	 *
+	 * @return void
+	 */
+	public function __construct()
 	{
 		parent::__construct();
 
@@ -63,12 +79,7 @@ class ProductController extends Controller
 	 */
 	public function index(Request $request)
 	{
-        $products = Product::active();
-        
-        if ($q = $request->query('q')) {
-            $q = Str::slug($q);
-            var_dump($q); exit;
-        }
+		$products = Product::active();
 
 		$products = $this->_searchProducts($products, $request);
 		$products = $this->_filterProductsByPriceRange($products, $request);
@@ -188,7 +199,6 @@ class ProductController extends Controller
 	private function _sortProducts($products, $request)
 	{
 		if ($sort = preg_replace('/\s+/', '', $request->query('sort'))) {
-            // var_dump($sort); exit;
 			$availableSorts = ['price', 'created_at'];
 			$availableOrder = ['asc', 'desc'];
 			$sortAndOrder = explode('-', $sort);
@@ -250,5 +260,4 @@ class ProductController extends Controller
 		
 		return $this->loadTheme('products.quick_view', $this->data);
 	}
-
 }

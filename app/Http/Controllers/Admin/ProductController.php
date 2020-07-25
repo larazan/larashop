@@ -7,15 +7,13 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
 use App\Http\Requests\ProductImageRequest;
 
-
 use App\Models\Product;
 use App\Models\Category;
-use App\Models\Productimage;
+use App\Models\ProductImage;
 use App\Models\Attribute;
 use App\Models\AttributeOption;
 use App\Models\ProductAttributeValue;
 use App\Models\ProductInventory;
-
 
 use Str;
 use Auth;
@@ -23,17 +21,16 @@ use DB;
 use Session;
 use App\Authorizable;
 
-
 class ProductController extends Controller
 {
 	use Authorizable;
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function __construct()
+	/**
+	 * Create a new controller instance.
+	 *
+	 * @return void
+	 */
+	public function __construct()
 	{
 		parent::__construct();
 
@@ -42,24 +39,27 @@ class ProductController extends Controller
 
 		$this->data['statuses'] = Product::statuses();
 		$this->data['types'] = Product::types();
-    }
-    
-    public function index()
-    {
-        //
-        $this->data['products'] = Product::orderBy('name', 'ASC')->paginate(10);
+	}
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function index()
+	{
+		$this->data['products'] = Product::orderBy('name', 'ASC')->paginate(10);
 
-        return view('admin.products.index', $this->data);
-    }
+		return view('admin.products.index', $this->data);
+	}
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $categories = Category::orderBy('name', 'ASC')->get();
+	/**
+	 * Show the form for creating a new resource.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function create()
+	{
+		$categories = Category::orderBy('name', 'ASC')->get();
 		$configurableAttributes = $this->_getConfigurableAttributes();
 
 		$this->data['categories'] = $categories->toArray();
@@ -69,14 +69,26 @@ class ProductController extends Controller
 		$this->data['configurableAttributes'] = $configurableAttributes;
 
 		return view('admin.products.form', $this->data);
-    }
+	}
 
-    private function _getConfigurableAttributes()
+	/**
+	 * Get configurable attributes for products
+	 *
+	 * @return array
+	 */
+	private function _getConfigurableAttributes()
 	{
 		return Attribute::where('is_configurable', true)->get();
-    }
-    
-    private function _generateAttributeCombinations($arrays)
+	}
+
+	/**
+	 * Generate attribute combination depend on the provided attributes
+	 *
+	 * @param array $arrays attributes
+	 *
+	 * @return array
+	 */
+	private function _generateAttributeCombinations($arrays)
 	{
 		$result = [[]];
 		foreach ($arrays as $property => $property_values) {
@@ -180,16 +192,16 @@ class ProductController extends Controller
 		}
 	}
 
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(ProductRequest $request)
-    {
-        $params = $request->except('_token');
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @param ProductRequest $request params
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function store(ProductRequest $request)
+	{
+		$params = $request->except('_token');
 		$params['slug'] = Str::slug($params['name']);
 		$params['user_id'] = Auth::user()->id;
 
@@ -214,55 +226,45 @@ class ProductController extends Controller
 		}
 
 		return redirect('admin/products/'. $product->id .'/edit/');
-    }
+	}
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        if (empty($id)) {
+	/**
+	 * Show the form for editing the specified resource.
+	 *
+	 * @param int $id product ID
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function edit($id)
+	{
+		if (empty($id)) {
 			return redirect('admin/products/create');
-        }
-        
+		}
+
 		$product = Product::findOrFail($id);
 		$product->qty = isset($product->productInventory) ? $product->productInventory->qty : null;
 
-        $categories = Category::orderBy('name', 'ASC')->get();
+		$categories = Category::orderBy('name', 'ASC')->get();
 
-        $this->data['categories'] = $categories->toArray();
+		$this->data['categories'] = $categories->toArray();
 		$this->data['product'] = $product;
 		$this->data['productID'] = $product->id;
 		$this->data['categoryIDs'] = $product->categories->pluck('id')->toArray();
 
 		return view('admin.products.form', $this->data);
-    }
+	}
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(ProductRequest $request, $id)
-    {
-        //
-        $params = $request->except('_token');
+	/**
+	 * Update the specified resource in storage.
+	 *
+	 * @param ProductRequest $request params
+	 * @param int            $id      product ID
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function update(ProductRequest $request, $id)
+	{
+		$params = $request->except('_token');
 		$params['slug'] = Str::slug($params['name']);
 
 		$product = Product::findOrFail($id);
@@ -292,7 +294,7 @@ class ProductController extends Controller
 
 		return redirect('admin/products');
 	}
-	
+
 	/**
 	 * Product variants
 	 *
@@ -315,26 +317,32 @@ class ProductController extends Controller
 		}
 	}
 
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-        $product  = Product::findOrFail($id);
+	/**
+	 * Remove the specified resource from storage.
+	 *
+	 * @param int $id product id
+	 *
+	 * @return void
+	 */
+	public function destroy($id)
+	{
+		$product  = Product::findOrFail($id);
 
 		if ($product->delete()) {
 			Session::flash('success', 'Product has been deleted');
 		}
 
 		return redirect('admin/products');
-    }
+	}
 
-    public function images($id)
+	/**
+	 * Show product images
+	 *
+	 * @param int $id product id
+	 *
+	 * @return void
+	 */
+	public function images($id)
 	{
 		if (empty($id)) {
 			return redirect('admin/products/create');
@@ -346,9 +354,16 @@ class ProductController extends Controller
 		$this->data['productImages'] = $product->productImages;
 
 		return view('admin.products.images', $this->data);
-    }
-    
-    public function add_image($id)
+	}
+
+	/**
+	 * Show add image form
+	 *
+	 * @param int $id product id
+	 *
+	 * @return Response
+	 */
+	public function addImage($id)
 	{
 		if (empty($id)) {
 			return redirect('admin/products');
@@ -360,19 +375,28 @@ class ProductController extends Controller
 		$this->data['product'] = $product;
 
 		return view('admin.products.image_form', $this->data);
-    }
-    
-    public function upload_image(ProductImageRequest $request, $id) {
-        $product = Product::findOrFail($id);
+	}
 
-        if ($request->has('image')) {
+	/**
+	 * Upload image
+	 *
+	 * @param ProductImageRequest $request params
+	 * @param int                 $id      product id
+	 *
+	 * @return Response
+	 */
+	public function uploadImage(ProductImageRequest $request, $id)
+	{
+		$product = Product::findOrFail($id);
+
+		if ($request->has('image')) {
 			$image = $request->file('image');
 			$name = $product->slug . '_' . time();
 			$fileName = $name . '.' . $image->getClientOriginalExtension();
 
 			$folder = ProductImage::UPLOAD_DIR. '/images';
 
-			$filePath = $image->storeAs($folder, $fileName, 'public');
+			$filePath = $image->storeAs($folder . '/original', $fileName, 'public');
 
 			$resizedImage = $this->_resizeImage($image, $fileName, $folder);
 
@@ -383,13 +407,6 @@ class ProductController extends Controller
 				],
 				$resizedImage
 			);
-			
-			// dd($params);
-            
-            $params = [
-                'product_id' => $product->id,
-                'path' => $filePath,
-            ];
 
 			if (ProductImage::create($params)) {
 				Session::flash('success', 'Image has been uploaded');
@@ -400,7 +417,7 @@ class ProductController extends Controller
 			return redirect('admin/products/' . $id . '/images');
 		}
 	}
-	
+
 	/**
 	 * Resize image
 	 *
@@ -453,7 +470,14 @@ class ProductController extends Controller
 		return $resizedImage;
 	}
 
-    public function remove_image($id)
+	/**
+	 * Remove image
+	 *
+	 * @param int $id image id
+	 *
+	 * @return Response
+	 */
+	public function removeImage($id)
 	{
 		$image = ProductImage::findOrFail($id);
 
