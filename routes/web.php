@@ -83,6 +83,11 @@ Route::group(
 		Route::get('reports/product', 'ReportController@product');
 		Route::get('reports/inventory', 'ReportController@inventory');
 		Route::get('reports/payment', 'ReportController@payment');
+
+		Route::get('settings', 'SettingController@index');
+		Route::put('settings/update', 'SettingController@update');
+
+		Route::resource('posts', 'PostController');
 	}
 );
 

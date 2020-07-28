@@ -86,6 +86,11 @@ class ProductController extends Controller
 		$products = $this->_filterProductsByAttribute($products, $request);
 		$products = $this->_sortProducts($products, $request);
 
+		// build breadcrumb data array
+		$breadcrumbs_data['current_page_title'] = '';
+		$breadcrumbs_data['breadcrumbs_array'] = $this->_generate_breadcrumbs_array($products);
+		$this->data['breadcrumbs_data'] = $breadcrumbs_data;
+
 		$this->data['products'] = $products->paginate(9);
 		return $this->loadTheme('products.index', $this->data);
 	}
@@ -238,7 +243,25 @@ class ProductController extends Controller
 
 		$this->data['product'] = $product;
 
+		// build breadcrumb data array
+		$breadcrumbs_data['current_page_title'] = $product->name;
+		$breadcrumbs_data['breadcrumbs_array'] = $this->_generate_breadcrumbs_array($product->id);
+		$this->data['breadcrumbs_data'] = $breadcrumbs_data;
+
 		return $this->loadTheme('products.show', $this->data);
+	}
+
+	public function _generate_breadcrumbs_array($id) {
+		$homepage_url = url('/');
+		$breadcrumbs_array[$homepage_url] = 'Home';
+		
+		// get sub cat title
+		$sub_cat_title = 'Products';
+		// get sub cat url
+		$sub_cat_url = url('products');
+	
+		$breadcrumbs_array[$sub_cat_url] = $sub_cat_title;
+		return $breadcrumbs_array;
 	}
 
 	/**

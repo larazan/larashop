@@ -6508,13 +6508,15 @@ a.icon-cart-furniture.food-cart span {
     text-transform: capitalize;
 }
 .breadcrumb-content li {
-    color: #fff;
+    /* color: #fff; */
+    color: #000;
     display: inline-block;
     font-weight: 600;
     text-transform: uppercase;
 }
 .breadcrumb-content li a {
-    color: #fff;
+    /* color: #fff; */
+    color: #aaa;
     position: relative;
     padding-right: 18px;
 }
@@ -6522,7 +6524,8 @@ a.icon-cart-furniture.food-cart span {
     color: #ccc;
 }
 .breadcrumb-content li a::after {
-    background-color: #fff;
+    /* background-color: #fff; */
+    background-color: #000;
     content: "";
     font-size: 8px;
     height: 1px;

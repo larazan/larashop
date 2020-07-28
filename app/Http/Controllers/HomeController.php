@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Slide;
 
 class HomeController extends Controller
 {
@@ -24,8 +25,10 @@ class HomeController extends Controller
      */
     public function index()
 	{
-		$products = Product::popular()->get();
-		$this->data['products'] = $products;
+		// $products = Product::popular()->get();
+        // $this->data['products'] = $products;
+        
+        $this->data['products'] = '';
 
 		$slides = Slide::active()->orderBy('position', 'ASC')->get();
         $this->data['slides'] = $slides;

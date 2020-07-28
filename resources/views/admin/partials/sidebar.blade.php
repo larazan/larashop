@@ -116,6 +116,16 @@
 								<span class="nav-text">Slides</span>
 								</a>
 							</li>
+							<li  class="{{ ($currentAdminSubMenu == 'post') ? 'active' : ''}}" >
+								<a class="sidenav-item-link" href="{{ url('admin/posts')}}">
+								<span class="nav-text">Posts</span>
+								</a>
+							</li>
+							<li  class="{{ ($currentAdminSubMenu == 'settings') ? 'active' : ''}}" >
+								<a class="sidenav-item-link" href="{{ url('admin/settings')}}">
+								<span class="nav-text">Settings</span>
+								</a>
+							</li>
 						</div>
 					</ul>
 				</li>
