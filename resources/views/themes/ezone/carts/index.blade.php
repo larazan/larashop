@@ -2,7 +2,7 @@
 
 @section('content')
 	<!-- header end -->
-	<div class="breadcrumb-area pt-205 breadcrumb-padding pb-210" style="background-image: url({{ asset('themes/ezone/assets/img/bg/breadcrumb.jpg') }})">
+	<!-- <div class="breadcrumb-area pt-205 breadcrumb-padding pb-210" style="background-image: url({{ asset('themes/ezone/assets/img/bg/breadcrumb.jpg') }})">
 		<div class="container">
 			<div class="breadcrumb-content text-center">
 				<h2>cart page</h2>
@@ -12,7 +12,7 @@
 				</ul>
 			</div>
 		</div>
-	</div>
+	</div> -->
 	<!-- shopping-cart-area start -->
 	<div class="cart-main-area pt-95 pb-100">
 		<div class="container">

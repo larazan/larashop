@@ -42,6 +42,12 @@ Route::resource('favorites', 'FavoriteController');
 Route::get('profile', 'Auth\ProfileController@index');
 Route::post('profile', 'Auth\ProfileController@update');
 
+Route::get('/blogs', 'PostController@index');
+Route::get('/blog/{slug}', 'PostController@show');
+
+Route::get('/contact', 'ContactController@index');
+Route::post('/contact/send', ['uses' => 'ContactController@store', 'as' => 'contact.send']);
+
 Route::group(
 	['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['auth']],
 	function () {

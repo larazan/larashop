@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
+use Faker\Factory as Faker;
 
 class PostsTableSeeder extends Seeder
 {
@@ -17,7 +18,7 @@ class PostsTableSeeder extends Seeder
 
         // generate 10 dummy post
         $posts = [];
-        $faker = Factory::create();
+        $faker = Faker::create();
         
         for ($i=0; $i <= 10 ; $i++) { 
             $image = "post_image_" . rand(1, 5) . ".jpg";
@@ -27,7 +28,7 @@ class PostsTableSeeder extends Seeder
                 'body' => $faker->paragraphs(rand(10, 15), true),
                 'slug' => $faker->slug(),
                 'featured_img' => rand(0, 1) == 1 ? $image : NULL,
-                'status' => 1,
+                'status' => 'active',
                 'created_at' => new DateTime(),
                 'updated_at' => new DateTime(),
             ];

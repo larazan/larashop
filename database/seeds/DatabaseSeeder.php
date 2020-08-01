@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
         $permissions = Permission::defaultPermissions();
 
         foreach ($permissions as $perms) {
-            Permission::firstOrCreate(['name' => $perms]);
+            Permission::firstOrCreate(['first_name' => $perms]);
         }
 
         $this->command->info('Default Permissions added.');

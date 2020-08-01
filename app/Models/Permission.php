@@ -53,6 +53,11 @@ class Permission extends \Spatie\Permission\Models\Permission
 			'add_slides',
 			'edit_slides',
 			'delete_slides',
+
+			'view_posts',
+			'add_posts',
+			'edit_posts',
+			'delete_posts',
 		];
 	}
 }

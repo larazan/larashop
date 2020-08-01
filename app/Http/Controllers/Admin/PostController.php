@@ -7,16 +7,20 @@ use Illuminate\Http\Request;
 use App\Http\Requests\PostRequest;
 
 use App\Models\Post;
+use App\Models\Permission;
+use App\Authorizable;
 
 class PostController extends Controller
 {
+    
+
     public function __construct()
 	{
 		parent::__construct();
 
 		$this->data['currentAdminMenu'] = 'general';
 		$this->data['currentAdminSubMenu'] = 'article';
-
+        $this->data['statuses'] = Post::STATUSES;
     }
     
     /**

@@ -34,7 +34,7 @@
 					@endif
 						<div class="form-group">
 							{!! Form::label('body', 'Body') !!}
-							{!! Form::textarea('body', null, ['class' => 'form-control', 'rows' => 3]) !!}
+							{!! Form::textarea('body', null, ['class' => 'form-control', 'rows' => 3, 'id' => 'editor']) !!}
 						</div>
 						<div class="form-group">
 							{!! Form::label('status', 'Status') !!}
