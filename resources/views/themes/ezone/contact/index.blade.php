@@ -8,17 +8,7 @@
             <div class="col-lg-8">
                 <div class="contact-map-wrapper">
                     <div class="contact-map mb-40">
-                        <div id="hastech2" style="position: relative; overflow: hidden;">
-                            <div style="height: 100%; width: 100%; position: absolute; top: 0px; left: 0px; background-color: rgb(229, 227, 223);">
-                                <div class="gm-err-container">
-                                    <div class="gm-err-content">
-                                        <div class="gm-err-icon"><img src="https://maps.gstatic.com/mapfiles/api-3/images/icon_error.png" draggable="false" style="user-select: none;"></div>
-                                        <div class="gm-err-title">Oops! Something went wrong.</div>
-                                        <div class="gm-err-message">This page didn't load Google Maps correctly. See the JavaScript console for technical details.</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        {!!html_entity_decode(set('map'))!!}
                     </div>
                     <div class="contact-message">
                         <div class="contact-title">

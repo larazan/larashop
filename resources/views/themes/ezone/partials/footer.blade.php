@@ -6,7 +6,7 @@
                 <div class="footer-widget mb-30">
                     <a href="#"><img src="{{ asset('themes/ezone/assets/img/logo/2.png') }}" alt=""></a>
                     <div class="footer-about-2">
-                        <p>There are many variations of passages of Lorem Ipsum <br>the majority have suffered alteration in some form, by <br> injected humour</p>
+                        <p>{{ set('sekilas') }}</p>
                     </div>
                 </div>
                 <div class="footer-widget mb-30">
@@ -17,7 +17,7 @@
                                 <span>Address: </span>
                             </div>
                             <div class="footer-info-content3">
-                                <p>66 Sipu road Rampura Banasree <br>USA- 10800</p>
+                                <p>{{ set('address') }}</p>
                             </div>
                         </div>
                         <div class="footer-address-furniture">
@@ -25,7 +25,7 @@
                                 <span>Phone: </span>
                             </div>
                             <div class="footer-info-content3">
-                                <p>+8801 (33) 515609735 <br>+8801 (66) 223352333</p>
+                                <p>{{ set('phone') }}</p>
                             </div>
                         </div>
                         <div class="footer-address-furniture">
@@ -33,7 +33,7 @@
                                 <span>E-mail: </span>
                             </div>
                             <div class="footer-info-content3">
-                                <p><a href="#"> email@domain.com</a> <br><a href="#"> domain@mail.info</a></p>
+                                <p><a href="#"> {{ set('email') }}</a></p>
                             </div>
                         </div>
                     </div>
@@ -62,7 +62,7 @@
             <div class="row">
                 <div class="col-12 text-center">
                     <div class="copyright-furniture">
-                        <p>Copyright © <a href="https://hastech.company/">HasTech</a> 2018 . All Right Reserved.</p>
+                        <p>Copyright © <a href="https://hastech.company/">{{ set('system_name') }}</a> {{ Date('Y') }} . All Right Reserved.</p>
                     </div>
                 </div>
             </div>

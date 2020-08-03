@@ -48,6 +48,8 @@ Route::get('/blog/{slug}', 'PostController@show');
 Route::get('/contact', 'ContactController@index');
 Route::post('/contact/send', ['uses' => 'ContactController@store', 'as' => 'contact.send']);
 
+Route::get('/info/{slug}', 'InfoController@show');
+
 Route::group(
 	['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['auth']],
 	function () {
@@ -94,6 +96,8 @@ Route::group(
 		Route::put('settings/update', 'SettingController@update');
 
 		Route::resource('posts', 'PostController');
+
+		Route::resource('infos', 'InfoController');
 	}
 );
 

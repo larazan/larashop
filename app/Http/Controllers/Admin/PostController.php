@@ -10,6 +10,8 @@ use App\Models\Post;
 use App\Models\Permission;
 use App\Authorizable;
 
+use Session;
+
 class PostController extends Controller
 {
     
@@ -56,6 +58,7 @@ class PostController extends Controller
     public function store(PostRequest $request)
     {
         $params = $request->except('_token');
+        $params['slug'] = Str::slug($params['title']);
 
 		$image = $request->file('featured_img');
 		$name = \Str::slug($params['title']) . '_' . time();
@@ -77,9 +80,9 @@ class PostController extends Controller
 		$params['position'] = Post::max('position') + 1;
 
 		if (Post::create($params)) {
-			\Session::flash('success', 'Slide has been created');
+			\Session::flash('success', 'Article has been created');
 		} else {
-			\Session::flash('error', 'Slide could not be created');
+			\Session::flash('error', 'Article could not be created');
 		}
 
 		return redirect('admin/posts');
@@ -146,6 +149,7 @@ class PostController extends Controller
     public function update(PostRequest $request, $id)
     {
         $params = $request->except('_token');
+        $params['slug'] = Str::slug($params['title']);
 
 		$post = Post::findOrFail($id);
 		if ($post->update($params)) {

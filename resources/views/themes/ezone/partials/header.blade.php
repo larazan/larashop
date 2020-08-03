@@ -11,18 +11,10 @@
 				<div class="menu-style-2 furniture-menu menu-hover">
 					<nav>
 						<ul>
-							<li><a href="/">home</a>
-								
-							</li>
-							<li><a href="#">pages</a>
-								
-							</li>
-							<li><a href="{{ url('products') }}">shop</a>
-								
-							</li>
-							<li><a href="{{ url('blogs') }}">blog</a>
-								
-							</li>
+							<li><a href="/">home</a></li>
+							<li><a href="{{ url('products') }}">shop</a></li>
+							<li><a href="{{ url('info/tentang-kami') }}">about</a></li>
+							<li><a href="{{ url('blogs') }}">blog</a></li>
 							<li><a href="{{ url('contact') }}">contact</a></li>
 						</ul>
 					</nav>
@@ -90,9 +82,9 @@
 										<li><a href="blog-details-sidebar.html">blog details 2</a></li>
 									</ul>
 								</li>
-								<li><a href="contact.html"> Contact  </a></li>
+								<li><a href="contact.html"> Contact </a></li>
 							</ul>
-						</nav>							
+						</nav>
 					</div>
 				</div>
 			</div>
@@ -104,19 +96,18 @@
 				<div class="furniture-login">
 					<ul>
 						@guest
-							<li>Get Access: <a href="{{ url('login') }}">Login</a></li>
-							<li><a href="{{ url('register') }}">Register</a></li>
+						<li>Get Access: <a href="{{ url('login') }}">Login</a></li>
+						<li><a href="{{ url('register') }}">Register</a></li>
 						@else
-							<li>Hello: <a href="{{ url('profile') }}">{{ Auth::user()->first_name }}</a></li>
-							<a href="{{ route('logout') }}"
-								onclick="event.preventDefault();
+						<li>Hello: <a href="{{ url('profile') }}">{{ Auth::user()->first_name }}</a></li>
+						<a href="{{ route('logout') }}" onclick="event.preventDefault();
 											document.getElementById('logout-form').submit();">
-								{{ __('Logout') }}
-							</a>
+							{{ __('Logout') }}
+						</a>
 
-							<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-								@csrf
-							</form>
+						<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+							@csrf
+						</form>
 						@endguest
 					</ul>
 				</div>

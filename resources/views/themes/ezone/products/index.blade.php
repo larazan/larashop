@@ -15,10 +15,20 @@
 <div class="container ptb-20">
 	<div class="breadcrumb-content" style="color: #000;">
 		<ul>
+		@if ($breadcrumbs_data['current_page_title'] != '')
 			@foreach ($breadcrumbs_data['breadcrumbs_array'] as $key => $value)
 			<li><a href="{{ $key }}">{{ $value }}</a></li>
 			@endforeach
 			<li>{{ $breadcrumbs_data['current_page_title'] }}</li>
+        @else 
+            @foreach ($breadcrumbs_data['breadcrumbs_array'] as $key => $value)
+                @if ($value == 'Home')
+                <li><a href="{{ $key }}">{{ $value }}</a></li>
+                @else
+                <li>{{ $value }}</li>
+                @endif
+            @endforeach
+        @endif
 		</ul>
 	</div>
 </div>
