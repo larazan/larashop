@@ -149,15 +149,9 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="pagination-style mt-20 text-center">
-                            <ul>
-                                <li><a href="https://demo.hasthemes.com/ezone-preview/ezone-v1/blog-sidebar.html#"><i class="ti-angle-left"></i></a></li>
-                                <li><a href="https://demo.hasthemes.com/ezone-preview/ezone-v1/blog-sidebar.html#">1</a></li>
-                                <li><a href="https://demo.hasthemes.com/ezone-preview/ezone-v1/blog-sidebar.html#">2</a></li>
-                                <li><a href="https://demo.hasthemes.com/ezone-preview/ezone-v1/blog-sidebar.html#">...</a></li>
-                                <li><a href="https://demo.hasthemes.com/ezone-preview/ezone-v1/blog-sidebar.html#">19</a></li>
-                                <li class="active"><a href="https://demo.hasthemes.com/ezone-preview/ezone-v1/blog-sidebar.html#"><i class="ti-angle-right"></i></a></li>
-                                {{ $posts->links() }}
-                            </ul>
+                           
+                            {{ $posts->links() }}
+                           
                         </div>
                     </div>
                 </div>

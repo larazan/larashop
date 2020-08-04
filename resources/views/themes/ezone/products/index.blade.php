@@ -72,7 +72,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="mt-50 text-center">
+				<div class="pagination-style mt-50 text-center">
 					{{ $products->links() }}
 				</div>
 			</div>

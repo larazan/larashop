@@ -50,6 +50,8 @@ Route::post('/contact/send', ['uses' => 'ContactController@store', 'as' => 'cont
 
 Route::get('/info/{slug}', 'InfoController@show');
 
+Route::post('/subscription', 'UserSubscriptionController@postSubscribe');
+
 Route::group(
 	['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['auth']],
 	function () {
