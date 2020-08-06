@@ -35,6 +35,11 @@
 								<span class="nav-text">Categories</span>
 								</a>
 							</li>
+							<li class="{{ ($currentAdminSubMenu == 'brand') ? 'active' : ''}}">
+								<a class="sidenav-item-link" href="{{ url('admin/brands')}}">
+								<span class="nav-text">Brands</span>
+								</a>
+							</li>
 							<li class="{{ ($currentAdminSubMenu == 'attribute') ? 'active' : ''}}">
 								<a class="sidenav-item-link" href="{{ url('admin/attributes')}}">
 								<span class="nav-text">Attributes</span>

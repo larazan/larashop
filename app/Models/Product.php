@@ -154,6 +154,32 @@ class Product extends Model
 	}
 
 	/**
+	 * Scope new arrival product
+	 *
+	 * @param Eloquent $query query builder
+	 *
+	 * @return Eloquent
+	 */
+	public function scopeNewArrival($query)
+	{
+		return $query->where('status', 1)
+			->where('parent_id', null);
+	}
+
+	/**
+	 * Scope all products
+	 *
+	 * @param Eloquent $query query builder
+	 *
+	 * @return Eloquent
+	 */
+	public function scopeAllProduct($query)
+	{
+		return $query->where('status', 1)
+			->where('parent_id', null);
+	}
+
+	/**
 	 * Scope active product
 	 *
 	 * @param Eloquent $query query builder

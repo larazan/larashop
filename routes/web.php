@@ -100,6 +100,8 @@ Route::group(
 		Route::resource('posts', 'PostController');
 
 		Route::resource('infos', 'InfoController');
+
+		Route::resource('brands', 'BrandController');
 	}
 );
 

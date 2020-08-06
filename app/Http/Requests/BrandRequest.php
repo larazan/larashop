@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PostRequest extends FormRequest
+class BrandRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,13 +24,12 @@ class PostRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'title' => 'required',
-            'slug' => 'unique:posts,slug,',
-			'status' => 'required',
+			'name' => 'required|unique:brands,name',
+			'slug' => 'unique:brands,slug,',
 		];
 
 		if ($this->method() == 'POST') {
-			$rules['featured_img'] = 'required|image|mimes:jpeg,png,jpg,gif|max:4096';
+			$rules['image'] = 'required|image|mimes:jpeg,png,jpg,gif|max:4096';
 		}
 
 		return $rules;

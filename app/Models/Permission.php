@@ -63,6 +63,11 @@ class Permission extends \Spatie\Permission\Models\Permission
 			'add_infos',
 			'edit_infos',
 			'delete_infos',
+
+			'view_brands',
+			'add_brands',
+			'edit_brands',
+			'delete_brands',
 		];
 	}
 }

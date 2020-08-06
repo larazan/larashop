@@ -25,10 +25,11 @@ class HomeController extends Controller
      */
     public function index()
 	{
+        $limit = 10;
 		// $products = Product::popular()->get();
         // $this->data['products'] = $products;
-        
-        $this->data['products'] = '';
+        $products = Product::active()->limit($limit)->get();
+        $this->data['products'] = $products;
 
 		$slides = Slide::active()->orderBy('position', 'ASC')->get();
         $this->data['slides'] = $slides;

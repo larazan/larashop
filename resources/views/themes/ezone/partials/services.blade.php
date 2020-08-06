@@ -1,3 +1,18 @@
+<style>
+/* .services-wrapper {
+    display: flex;
+    justify-content: space-between;
+} */
+.single-services {
+    display: flex;
+    justify-content: space-between;
+}
+.services-content {
+    float: left;
+    margin-right: 10px;
+}
+</style>
+
  <!-- services area start -->
  <div class="services-area wrapper-padding-4 gray-bg pt-120 pb-80">
     <div class="container-fluid">
@@ -7,7 +22,7 @@
                     <img src="{{ asset('themes/ezone/assets/img/icon-img/26.png') }}" alt="">
                 </div>
                 <div class="services-content">
-                    <h4>Free Shippig</h4>
+                    <h4>Free Shipping</h4>
                     <p>Contrary to popular belief, Lorem Ipsum is random text. </p>
                 </div>
             </div>
