@@ -18,6 +18,7 @@ class BrandController extends Controller
 
         $this->data['currentAdminMenu'] = 'catalog';
         $this->data['currentAdminSubMenu'] = 'brand';
+        $this->data['statuses'] = Brand::STATUSES;
     }
 
     /**
@@ -53,24 +54,27 @@ class BrandController extends Controller
     public function store(BrandRequest $request)
     {
         $params = $request->except('_token');
+        $params['slug'] = Str::slug($params['name']);
+        $image = $request->file('image');
+        if ($image) {
+            # code...
+       
+            $name = \Str::slug($params['name']) . '_' . time();
+            $fileName = $name . '.' . $image->getClientOriginalExtension();
 
-		$image = $request->file('image');
-		$name = \Str::slug($params['name']) . '_' . time();
-		$fileName = $name . '.' . $image->getClientOriginalExtension();
+            $folder = Brand::UPLOAD_DIR. '/images';
 
-		$folder = Brand::UPLOAD_DIR. '/images';
+            $filePath = $image->storeAs($folder . '/original', $fileName, 'public');
 
-		$filePath = $image->storeAs($folder . '/original', $fileName, 'public');
+            $resizedImage = $this->_resizeImage($image, $fileName, $folder);
 
-		$resizedImage = $this->_resizeImage($image, $fileName, $folder);
+            $params['original'] = $filePath;
+            $params['extra_large'] = $resizedImage['extra_large'];
+            $params['small'] = $resizedImage['small'];
+            $params['user_id'] = \Auth::user()->id;
 
-		$params['original'] = $filePath;
-		$params['extra_large'] = $resizedImage['extra_large'];
-		$params['small'] = $resizedImage['small'];
-		$params['user_id'] = \Auth::user()->id;
-
-		unset($params['image']);
-
+            unset($params['image']);
+        }
 
 		if (Brand::create($params)) {
 			\Session::flash('success', 'Brand has been created');

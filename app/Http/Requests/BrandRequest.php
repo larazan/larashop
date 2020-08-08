@@ -28,9 +28,9 @@ class BrandRequest extends FormRequest
 			'slug' => 'unique:brands,slug,',
 		];
 
-		if ($this->method() == 'POST') {
-			$rules['image'] = 'required|image|mimes:jpeg,png,jpg,gif|max:4096';
-		}
+		// if ($this->method() == 'POST') {
+		// 	$rules['image'] = 'required|image|mimes:jpeg,png,jpg,gif|max:4096';
+		// }
 
 		return $rules;
     }

@@ -7,6 +7,14 @@ use App\Models\Info;
 
 class InfoController extends Controller
 {
+
+	public function __construct()
+	{
+		parent::__construct();
+
+		$this->data['informations'] = Info::orderBy('id', 'ASC')->get();
+	}
+
     public function show($slug)
 	{
 		$info = Info::where('slug', $slug)->first();

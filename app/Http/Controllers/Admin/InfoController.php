@@ -56,9 +56,9 @@ class InfoController extends Controller
         $params['slug'] = Str::slug($params['type']);
 
         if (Info::create($params)) {
-			\Session::flash('success', 'Info has been created');
+			Session::flash('success', 'Info has been created');
 		} else {
-			\Session::flash('error', 'Info could not be created');
+			Session::flash('error', 'Info could not be created');
 		}
 
 		return redirect('admin/infos');

@@ -30,6 +30,12 @@
 			<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
 		<script src="{{ URL::asset('admin/assets/plugins/nprogress/nprogress.js') }}"></script>
+
+		<style>
+		.ck-editor__editable {
+  min-height: 200px;
+}
+		</style>
 	</head>
 	<body class="header-fixed sidebar-fixed sidebar-dark header-light" id="body">
 	

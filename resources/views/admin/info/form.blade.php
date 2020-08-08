@@ -14,9 +14,9 @@
 						<h2>{{ $formTitle }} Information</h2>
 				</div>
 				<div class="card-body">
-					@include('admin.partials.flash', ['$errors' => $errors])
+				@include('admin.partials.flash', ['$errors' => $errors])
 					@if (!empty($info))
-						{!! Form::model($info, ['url' => ['admin/infos', $info->id], 'method' => 'PUT') !!}
+						{!! Form::model($info, ['url' => ['admin/infos', $info->id], 'method' => 'PUT']) !!}
 						{!! Form::hidden('id') !!}
 					@else
 						{!! Form::open(['url' => 'admin/infos']) !!}
@@ -28,7 +28,7 @@
 
 						<div class="form-group">
 							{!! Form::label('body', 'Body') !!}
-							{!! Form::textarea('body', null, ['class' => 'form-control', 'rows' => 3, 'id' => 'editor']) !!}
+							{!! Form::textarea('body', null, ['class' => 'form-control', 'rows' => 10, 'id' => 'editor']) !!}
 						</div>
 						
 						<div class="form-footer pt-5 border-top">

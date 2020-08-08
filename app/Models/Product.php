@@ -71,6 +71,11 @@ class Product extends Model
 		return $this->belongsToMany('App\Models\Category', 'product_categories');
 	}
 
+	public function brands()
+	{
+		return $this->belongsToMany('App\Models\Brand', 'product_brands');
+	}
+
 	/**
 	 * Define relationship with the Variants
 	 *

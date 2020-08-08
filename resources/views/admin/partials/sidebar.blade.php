@@ -121,7 +121,7 @@
 								<span class="nav-text">Slides</span>
 								</a>
 							</li>
-							<li  class="{{ ($currentAdminSubMenu == 'post') ? 'active' : ''}}" >
+							<li  class="{{ ($currentAdminSubMenu == 'article') ? 'active' : ''}}" >
 								<a class="sidenav-item-link" href="{{ url('admin/posts')}}">
 								<span class="nav-text">Posts</span>
 								</a>

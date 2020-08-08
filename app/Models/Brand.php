@@ -36,5 +36,10 @@ class Brand extends Model
 	{
 		return $query->where('status', self::ACTIVE);
 	}
+
+    public function products()
+    {
+        return $this->belongsToMany('App\Models\Product', 'product_brands');
+    }
 	
 }

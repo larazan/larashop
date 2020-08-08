@@ -30,6 +30,10 @@
                             {!! Form::select('type', $types , !empty($product) ? $product->type : null, ['class' => 'form-control product-type', 'placeholder' => '-- Choose Product Type --', 'disabled' => !empty($product)]) !!}
                         </div>
                         <div class="form-group">
+                            {!! Form::label('brand', 'Brand') !!}
+                            {!! Form::select('brand_id', $brands, !empty($product) ? $brandID : null, ['class' => 'form-control', 'placeholder' => '-- Choose Brand --']) !!}
+                        </div>
+                        <div class="form-group">
                             {!! Form::label('sku', 'SKU') !!}
                             {!! Form::text('sku', null, ['class' => 'form-control', 'placeholder' => 'sku']) !!}
                         </div>

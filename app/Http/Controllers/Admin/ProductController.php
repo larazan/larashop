@@ -14,6 +14,7 @@ use App\Models\Attribute;
 use App\Models\AttributeOption;
 use App\Models\ProductAttributeValue;
 use App\Models\ProductInventory;
+use App\Models\Brand;
 
 use Str;
 use Auth;
@@ -60,11 +61,14 @@ class ProductController extends Controller
 	public function create()
 	{
 		$categories = Category::orderBy('name', 'ASC')->get();
+		$brands = Brand::pluck('name', 'id');
 		$configurableAttributes = $this->_getConfigurableAttributes();
 
 		$this->data['categories'] = $categories->toArray();
+		$this->data['brands'] = $brands;
 		$this->data['product'] = null;
 		$this->data['productID'] = 0;
+		$this->data['brandID'] = null;
 		$this->data['categoryIDs'] = [];
 		$this->data['configurableAttributes'] = $configurableAttributes;
 
@@ -208,8 +212,10 @@ class ProductController extends Controller
 		$product = DB::transaction(
 			function () use ($params) {
 				$categoryIds = !empty($params['category_ids']) ? $params['category_ids'] : [];
+				$brandId = $params['brand_id'];
 				$product = Product::create($params);
 				$product->categories()->sync($categoryIds);
+				$product->brands()->sync($brandId);
 
 				if ($params['type'] == 'configurable') {
 					$this->_generateProductVariants($product, $params);
@@ -245,11 +251,14 @@ class ProductController extends Controller
 		$product->qty = isset($product->productInventory) ? $product->productInventory->qty : null;
 
 		$categories = Category::orderBy('name', 'ASC')->get();
+		$brands = Brand::pluck('name', 'id');
 
 		$this->data['categories'] = $categories->toArray();
+		$this->data['brands'] = $brands;
 		$this->data['product'] = $product;
 		$this->data['productID'] = $product->id;
 		$this->data['categoryIDs'] = $product->categories->pluck('id')->toArray();
+		$this->data['brandID'] = 2; // $product->brands->pluck('id');
 
 		return view('admin.products.form', $this->data);
 	}

@@ -21,7 +21,12 @@ class SettingController extends Controller
     
     public function index() {
         $setting = Setting::find(1); 
-        $this->data['system_name'] = $setting->value;
+        $this->data['system_name'] = set('system_name');
+        $this->data['address'] = set('address');
+        $this->data['phone'] = set('phone');
+        $this->data['email'] = set('email');
+        $this->data['sekilas'] = set('sekilas');
+        $this->data['map'] = set('map');
         return view('admin.settings.form', $this->data);
     }
 
