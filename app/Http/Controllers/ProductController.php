@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\ProductAttributeValue;
 use App\Models\AttributeOption;
 use App\Models\Category;
+use App\Models\Brand;
 
 use Str;
 
@@ -34,6 +35,8 @@ class ProductController extends Controller
 		parent::__construct();
 
 		$this->data['q'] = null;
+
+		$this->data['brands'] = Brand::orderBy('id', 'ASC')->get();
 
 		$this->data['categories'] = Category::parentCategories()
 			->orderBy('name', 'asc')
@@ -123,6 +126,19 @@ class ProductController extends Controller
 				'categories',
 				function ($query) use ($categoryIds) {
 					$query->whereIn('categories.id', $categoryIds);
+				}
+			);
+		}
+
+		if ($brandSlug = $request->query('brand')) {
+			$brand = Brand::where('slug', $brandSlug)->firstOrFail();
+
+			$brandId = $brand->id;
+
+			$products = $products->whereHas(
+				'brands',
+				function ($query) use ($brandId) {
+					$query->where('brands.id', $brandId);
 				}
 			);
 		}
@@ -230,6 +246,8 @@ class ProductController extends Controller
 	 */
 	public function show($slug)
 	{
+		$limit = 3;
+		$products = Product::active()->limit($limit)->get();
 		$product = Product::active()->where('slug', $slug)->first();
 
 		if (!$product) {
@@ -242,7 +260,7 @@ class ProductController extends Controller
 		}
 
 		$this->data['product'] = $product;
-
+		$this->data['products'] = $products;
 		// build breadcrumb data array
 		$breadcrumbs_data['current_page_title'] = $product->name;
 		$breadcrumbs_data['breadcrumbs_array'] = $this->_generate_breadcrumbs_array($product->id);

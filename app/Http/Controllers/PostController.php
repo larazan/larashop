@@ -7,6 +7,13 @@ use App\Models\Post;
 
 class PostController extends Controller
 {
+	public function __construct()
+	{
+		parent::__construct();
+
+		$limit = 5;
+        $this->data['articles'] = Post::active()->limit($limit)->get();
+	}
     
     public function index(Request $request)
 	{

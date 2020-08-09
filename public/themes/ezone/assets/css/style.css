@@ -7310,14 +7310,18 @@ h5.panel-title {
 .single-top-rated {
     display: flex;
 }
+.top-rated-img img {
+    width: 100%;
+}
 .top-rated-text {
     margin-left: 20px;
 }
 .top-rated-text > h4 {
     color: #383838;
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 400;
     margin: 0;
+    line-height: 21px;
 }
 .top-rated-rating {
     line-height: 1;
@@ -7329,7 +7333,9 @@ h5.panel-title {
 }
 .top-rated-text > span {
     color: #8b8b8b;
-    font-weight: 600;
+    font-weight: 400;
+    display: block;
+    margin-bottom: 6px;
 }
 .shop-bar {
     display: flex;

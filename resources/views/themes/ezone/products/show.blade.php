@@ -181,4 +181,22 @@
 		</div>
 	</div>
 </div>
+
+
+    
+<div id="shopify-section-related-products" class="shopify-section">
+	<div class="product-area related_product_area">
+		<div class="container">
+			<div class="section-title-3 text-center mb-50">
+				<h2>Related Products</h2>
+			</div>
+		
+				@include('themes.ezone.products.related')
+    		
+		</div>
+	</div>
+</div>
+
+@include('themes.ezone.products.rel')
+			
 @endsection

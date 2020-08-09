@@ -31,7 +31,26 @@
                 </div>
                 
             </div>
-            <div class="col-lg-4"></div>
+            <div class="col-lg-4">
+            <div class="shop-sidebar">
+                    
+                    <!-- <div class="sidebar-widget mb-50">
+                        <h3 class="sidebar-title">Search Products</h3>
+                        <div class="sidebar-search">
+                            <form action="https://demo.hasthemes.com/ezone-preview/ezone-v1/blog-sidebar.html#">
+                                <input placeholder="Search Products..." type="text">
+                                <button><i class="ti-search"></i></button>
+                            </form>
+                        </div>
+                    </div> -->
+                    
+                    <div class="sidebar-widget mb-50">
+                        <h3 class="sidebar-title">Recent Posts</h3>
+                        @include('themes.ezone.blogs.sidebar')
+                    </div>
+                    
+                </div>
+            </div>
         </div>
     </div>
 </div>

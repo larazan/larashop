@@ -107,6 +107,29 @@
                 }
             }
         })
+
+        $('.related-product-active').owlCarousel({
+        loop: true,
+        nav: false,
+        autoplay: false,
+        autoplayTimeout: 5000,
+        item: 3,
+        margin: 30,
+        responsive: {
+            0: {
+                items: 1
+            },
+            768: {
+                items: 2
+            },
+            1000: {
+                items: 3
+            },
+            1200: {
+                items: 3
+            }
+        }
+    })
     </script>
     <script>
         // (function($) {
