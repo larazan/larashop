@@ -47,7 +47,9 @@
                                 @endforelse
                             </tbody>
                         </table>
+                        <div class="pagination-style">
                         {{ $shipments->links() }}
+                        </div>
                     </div>
                 </div>
             </div>

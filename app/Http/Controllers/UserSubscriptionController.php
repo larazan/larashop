@@ -23,4 +23,39 @@ class UserSubscriptionController extends Controller
 
         return response()->json(['success' => true]);
     }
+
+    public function checkSubscriber(Request $request) {
+        if($request->ajax()) {
+            $data = $request->all();
+            echo "<pre>";
+            print_r($data);
+            die;
+
+            // $subscriberCount = Subscription::where('email', $data['subscriber_email'])->count();
+            // if ($subscriberCount > 0) {
+            //     echo "exists";
+            // }
+        }
+    }
+
+    public function addSubscriber(Request $request) {
+        if($request->ajax()) {
+            $data = $request->all();
+            // echo "<pre>";
+            // print_r($data);
+            // die;
+
+            $subscriberCount = Subscription::where('email', $data['subscriber_email'])->count();
+            if ($subscriberCount > 0) {
+                echo "exists";
+            } else {
+                // add email to table
+                $newsletter = new Subscription;
+                $newsletter->email = $data['subscriber_email'];
+                $newsletter->status = 1;
+                $newsletter->save();
+                echo "saved";
+            }
+        }
+    }
 }

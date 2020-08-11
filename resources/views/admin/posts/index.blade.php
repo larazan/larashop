@@ -46,7 +46,10 @@
                                 @endforelse
                             </tbody>
                         </table>
+                        <div class="pagination-style">
                         {{ $articles->links() }}
+                        </div>
+                        
                     </div>
 
                     @can('add_posts')

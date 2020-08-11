@@ -42,18 +42,24 @@
                     <h3 class="footer-widget-title-5">Newsletter</h3>
                     <div class="footer-newsletter-2">
                         <p>Send us your mail or next updates</p>
+                        <div id="statusSubscribe" style="display: none;"></div>
                         <div id="mc_embed_signup" class="subscribe-form-5 subscribe-section">
-                            <form method="post" id="mc-embedded-subscribe-form" class="validate subscribe-form" novalidate>
+                            <form action="javascript:void(0)" type="post" id="mc-embedded-subscribe-form" class="validate subscribe-form searchform" novalidate>
+                                @csrf
+                                                         
                                 <div id="mc_embed_signup_scroll" class="mc-form">
-                                    <input type="email" name="email" class="email" id="emailField" placeholder="Enter mail address" required>
+                                    <!-- <input type="email" name="email" class="email" id="emailField" placeholder="Enter mail address" required> -->
+                                    <input onfocus="enableSubscriber();" onfocusout="enableSubscriber();" name="subscriber_email" class="email subscriber_email" id="emailField" type="email" placeholder="Enter email address">
                                     <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
                                     <div class="mc-news" aria-hidden="true"><input type="text" name="b_6bbb9b6f5827bd842d9640c82_05d85f18ef" tabindex="-1" value=""></div>
                                     <div class="clear">
-                                        <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe submitButton" class="button">
+                                        <input type="submit" onclick="checkSubscriber(); addSubscriber();" value="Subscribe" name="subscribe" id="mc-embedded-subscribe submitButton" class="button">
                                     </div>
+                                    
                                     <div class="invalid-feedback d-none">
                                         Please provide a valid email
                                     </div>
+                                    
                                 </div>
                             </form>
                         </div>
@@ -73,4 +79,6 @@
             </div>
         </div>
     </div>
+    
 </footer>
+

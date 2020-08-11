@@ -45,7 +45,9 @@
                                 @endforelse
                             </tbody>
                         </table>
+                        <div class="pagination-style">
                         {{ $categories->links() }}
+                        </div>
                     </div>
 
                     @can('add_categories')

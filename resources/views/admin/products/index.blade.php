@@ -47,7 +47,9 @@
                                 @endforelse
                             </tbody>
                         </table>
+                        <div class="pagination-style">
                         {{ $products->links() }}
+                        </div>
                     </div>
                     @can('add_products')
                         <div class="card-footer text-right">

@@ -59,7 +59,9 @@
                                 @endforelse
                             </tbody>
                         </table>
+                        <div class="pagination-style">
                         {{ $slides->links() }}
+                        </div>
                     </div>
 
                     @can('add_slides')

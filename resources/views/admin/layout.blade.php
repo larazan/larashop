@@ -1,65 +1,93 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-	<head>
-		<meta charset="utf-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<meta name="description" content="Sleek Dashboard - Free Bootstrap 4 Admin Dashboard Template and UI Kit. It is very powerful bootstrap admin dashboard, which allows you to build products like admin panels, content management systems and CRMs etc.">
-		<title>Sleek - Admin Dashboard Template</title>
 
-		<!-- GOOGLE FONTS -->
-		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500|Poppins:400,500,600,700|Roboto:400,500" rel="stylesheet" />
-		<link href="https://cdn.materialdesignicons.com/3.0.39/css/materialdesignicons.min.css" rel="stylesheet" />
-		<!-- PLUGINS CSS STYLE -->
-		<link href="{{ URL::asset('admin/assets/plugins/nprogress/nprogress.css') }}" rel="stylesheet" />
-		<!-- No Extra plugin used -->  
-		<link href="{{ URL::asset('admin/assets/plugins/jvectormap/jquery-jvectormap-2.0.3.css') }}" rel="stylesheet" />
-		<link href="{{ URL::asset('admin/assets/plugins/daterangepicker/daterangepicker.css') }}" rel="stylesheet" />
-		<link href="{{ URL::asset('admin/assets/plugins/toastr/toastr.min.css') }}" rel="stylesheet" />
-		<!-- SLEEK CSS -->
-		<link id="sleek-css" rel="stylesheet" href="{{ URL::asset('admin/assets/css/sleek.css') }}" />
-		<link id="bsdp-css" rel="stylesheet" href="{{ URL::asset('admin/assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css') }}">
-		<!-- FAVICON -->
-		<link href="{{ URL::asset('admin/assets/img/favicon.png') }}" rel="shortcut icon" />
-		<!--
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="Sleek Dashboard - Free Bootstrap 4 Admin Dashboard Template and UI Kit. It is very powerful bootstrap admin dashboard, which allows you to build products like admin panels, content management systems and CRMs etc.">
+	<title>Sleek - Admin Dashboard Template</title>
+
+	<!-- GOOGLE FONTS -->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500|Poppins:400,500,600,700|Roboto:400,500" rel="stylesheet" />
+	<link href="https://cdn.materialdesignicons.com/3.0.39/css/materialdesignicons.min.css" rel="stylesheet" />
+	<!-- PLUGINS CSS STYLE -->
+	<link href="{{ URL::asset('admin/assets/plugins/nprogress/nprogress.css') }}" rel="stylesheet" />
+	<!-- No Extra plugin used -->
+	<link href="{{ URL::asset('admin/assets/plugins/jvectormap/jquery-jvectormap-2.0.3.css') }}" rel="stylesheet" />
+	<link href="{{ URL::asset('admin/assets/plugins/daterangepicker/daterangepicker.css') }}" rel="stylesheet" />
+	<link href="{{ URL::asset('admin/assets/plugins/toastr/toastr.min.css') }}" rel="stylesheet" />
+	<!-- SLEEK CSS -->
+	<link id="sleek-css" rel="stylesheet" href="{{ URL::asset('admin/assets/css/sleek.css') }}" />
+	<link id="bsdp-css" rel="stylesheet" href="{{ URL::asset('admin/assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css') }}">
+	<!-- FAVICON -->
+	<link href="{{ URL::asset('admin/assets/img/favicon.png') }}" rel="shortcut icon" />
+	<!--
 			HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries
 		-->
-		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-		<!--[if lt IE 9]>
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
 			<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 			<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
-		<script src="{{ URL::asset('admin/assets/plugins/nprogress/nprogress.js') }}"></script>
+	<script src="{{ URL::asset('admin/assets/plugins/nprogress/nprogress.js') }}"></script>
 
-		<style>
+	<style>
 		.ck-editor__editable {
-  min-height: 200px;
-}
-		</style>
-	</head>
-	<body class="header-fixed sidebar-fixed sidebar-dark header-light" id="body">
-	
+			min-height: 200px;
+		}
+
+		/* pagination */
+		.pagination-style ul li {
+			display: inline-block;
+			margin: 0 3px;
+		}
+
+		.pagination-style ul li a {
+			background-color: #f6f6f6;
+			color: #3f3f3f;
+			display: inline-block;
+			font-size: 13px;
+			font-weight: 500;
+			height: 40px;
+			line-height: 41px;
+			width: 40px;
+			text-align: center;
+		}
+
+		.pagination-style ul li.active a,
+		.pagination-style ul li a:hover {
+			background-color: #3f3f3f;
+			color: #fff;
+		}
+	</style>
+</head>
+
+<body class="header-fixed sidebar-fixed sidebar-dark header-light" id="body">
+
 	<script>
-		NProgress.configure({ showSpinner: false });
+		NProgress.configure({
+			showSpinner: false
+		});
 		NProgress.start();
 	</script>
-	<div class="mobile-sticky-body-overlay"></div>  
+	<div class="mobile-sticky-body-overlay"></div>
 	<div id="toaster"></div>
 	<div class="wrapper">
 		<!-- Github Link -->
 		<a href="https://github.com/tafcoder/sleek-dashboard" class="github-link">
-		<svg width="70" height="70" viewBox="0 0 250 250" aria-hidden="true">
-			<defs>
-			<linearGradient id="grad1" x1="0%" y1="75%" x2="100%" y2="0%">
-				<stop offset="0%" style="stop-color:#896def;stop-opacity:1" />
-				<stop offset="100%" style="stop-color:#482271;stop-opacity:1" />
-			</linearGradient>
-			</defs>
-			<path d="M 0,0 L115,115 L115,115 L142,142 L250,250 L250,0 Z" fill="url(#grad1)"></path>
-		</svg>
-		<i class="mdi mdi-github-circle"></i>
+			<svg width="70" height="70" viewBox="0 0 250 250" aria-hidden="true">
+				<defs>
+					<linearGradient id="grad1" x1="0%" y1="75%" x2="100%" y2="0%">
+						<stop offset="0%" style="stop-color:#896def;stop-opacity:1" />
+						<stop offset="100%" style="stop-color:#482271;stop-opacity:1" />
+					</linearGradient>
+				</defs>
+				<path d="M 0,0 L115,115 L115,115 L142,142 L250,250 L250,0 Z" fill="url(#grad1)"></path>
+			</svg>
+			<i class="mdi mdi-github-circle"></i>
 		</a>
-		
+
 		@include('admin.partials.sidebar')
 
 		<div class="page-wrapper">
@@ -87,26 +115,26 @@
 			format: 'yyyy-mm-dd'
 		});
 
-		$(".delete").on("submit", function () {
+		$(".delete").on("submit", function() {
 			return confirm("Do you want to remove this?");
 		});
 
-		$("a.delete").on("click", function () {
+		$("a.delete").on("click", function() {
 			event.preventDefault();
 			var orderId = $(this).attr('order-id');
 
 			if (confirm("Do you want to remove this?")) {
-				document.getElementById('delete-form-' + orderId ).submit();
+				document.getElementById('delete-form-' + orderId).submit();
 			}
 		});
 
-		$(".restore").on("click", function () {
+		$(".restore").on("click", function() {
 			return confirm("Do you want to restore this?");
 		});
 
 		function showHideConfigurableAttributes() {
 			var productType = $(".product-type").val();
-				
+
 			if (productType == 'configurable') {
 				$(".configurable-attributes").show();
 			} else {
@@ -114,7 +142,7 @@
 			}
 		}
 
-		$(function(){
+		$(function() {
 			showHideConfigurableAttributes();
 			$(".product-type").change(function() {
 				showHideConfigurableAttributes();
@@ -122,13 +150,14 @@
 		});
 	</script>
 	<!-- CkEditor -->
-<script src="https://cdn.ckeditor.com/ckeditor5/16.0.0/classic/ckeditor.js"></script>
-<script>
-    ClassicEditor
-    .create(document.querySelector('#editor'))
-    .catch(error=>{
-        console.error(error);
-    });                                             
-</script>
-	</body>
+	<script src="https://cdn.ckeditor.com/ckeditor5/16.0.0/classic/ckeditor.js"></script>
+	<script>
+		ClassicEditor
+			.create(document.querySelector('#editor'))
+			.catch(error => {
+				console.error(error);
+			});
+	</script>
+</body>
+
 </html>

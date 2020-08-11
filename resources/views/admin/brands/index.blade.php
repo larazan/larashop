@@ -45,7 +45,9 @@
                                 @endforelse
                             </tbody>
                         </table>
+                        <div class="pagination-style">
                         {{ $brands->links() }}
+                        </div>
                     </div>
 
                     @can('add_brands')

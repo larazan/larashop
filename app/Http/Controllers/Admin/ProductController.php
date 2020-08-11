@@ -258,7 +258,7 @@ class ProductController extends Controller
 		$this->data['product'] = $product;
 		$this->data['productID'] = $product->id;
 		$this->data['categoryIDs'] = $product->categories->pluck('id')->toArray();
-		$this->data['brandID'] = 2; // $product->brands->pluck('id');
+		$this->data['brandID'] = $product->brands->pluck('id');
 
 		return view('admin.products.form', $this->data);
 	}
@@ -282,8 +282,10 @@ class ProductController extends Controller
 		$saved = DB::transaction(
 			function () use ($product, $params) {
 				$categoryIds = !empty($params['category_ids']) ? $params['category_ids'] : [];
+				$brandId = $params['brand_id'];
 				$product->update($params);
 				$product->categories()->sync($categoryIds);
+				$product->brands()->sync($brandId);
 
 				if ($product->type == 'configurable') {
 					$this->_updateProductVariants($params);

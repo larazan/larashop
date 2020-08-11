@@ -5,8 +5,18 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use App\Models\Subscription;
+
 class UserSubscriptionController extends Controller
 {
+    public function __construct()
+	{
+		parent::__construct();
+
+		$this->data['currentAdminMenu'] = 'general';
+		$this->data['currentAdminSubMenu'] = 'subscriptions';
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +24,9 @@ class UserSubscriptionController extends Controller
      */
     public function index()
     {
-        //
+        $this->data['subscriptions'] = Subscription::orderBy('id', 'ASC')->paginate(10);
+
+        return view('admin.subscriptions.index', $this->data);
     }
 
     /**

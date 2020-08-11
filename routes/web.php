@@ -51,6 +51,8 @@ Route::post('/contact/send', ['uses' => 'ContactController@store', 'as' => 'cont
 Route::get('/info/{slug}', 'InfoController@show');
 
 Route::post('/subscription', 'UserSubscriptionController@postSubscribe');
+Route::post('/check-subscriber-email', 'UserSubscriptionController@checkSubscriber');
+Route::post('/add-subscriber-email', 'UserSubscriptionController@addSubscriber');
 
 Route::group(
 	['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['auth']],
@@ -102,6 +104,8 @@ Route::group(
 		Route::resource('infos', 'InfoController');
 
 		Route::resource('brands', 'BrandController');
+
+		Route::resource('subscriptions', 'UserSubscriptionController');
 	}
 );
 

@@ -131,6 +131,11 @@
 								<span class="nav-text">Infos</span>
 								</a>
 							</li>
+							<li  class="{{ ($currentAdminSubMenu == 'subscriptions') ? 'active' : ''}}" >
+								<a class="sidenav-item-link" href="{{ url('admin/subscriptions')}}">
+								<span class="nav-text">Subscriptions</span>
+								</a>
+							</li>
 							<li  class="{{ ($currentAdminSubMenu == 'settings') ? 'active' : ''}}" >
 								<a class="sidenav-item-link" href="{{ url('admin/settings')}}">
 								<span class="nav-text">Settings</span>

@@ -6,30 +6,34 @@
             <div class="col-lg-12">
                 <div class="card card-default">
                     <div class="card-header card-header-border-bottom">
-                        <h2>Information</h2>
+                        <h2>Email Subscriptions</h2>
                     </div>
                     <div class="card-body">
                         @include('admin.partials.flash')
                         <table class="table table-bordered table-striped">
                             <thead>
                                 <th>#</th>
-                                <th>Type</th>
-                                <!-- <th>Description</th> -->
+                                <th>Email</th>
+                                
+                                <th>Status</th>
+                                <th>Date</th>
                                 <th>Action</th>
                             </thead>
                             <tbody>
-                                @forelse ($infos as $info)
+                                @forelse ($subscriptions as $subscribe)
                                     <tr>    
-                                        <td>{{ $info->id }}</td>
-                                        <td>{{ ucwords($info->type) }}</td>  
-                                        <!-- <td>{{ substr(strip_tags($info->body), 0, 200) }}...</td>                                      -->
+                                        <td>{{ $subscribe->id }}</td>
+                                        <td>{{ $subscribe->email }}</td>
+                                       
+                                        <td>{{ $subscribe->status }}</td>
+                                        <td>{{ $subscribe->created_at }}</td>
                                         <td>
-                                            @can('edit_infos')
-                                                <a href="{{ url('admin/infos/'. $info->id .'/edit') }}" class="btn btn-warning btn-sm">edit</a>
+                                            @can('edit_subscriptions')
+                                                <a href="{{ url('admin/subscriptions/'. $subscribe->id .'/edit') }}" class="btn btn-warning btn-sm">edit</a>
                                             @endcan
 
-                                            @can('delete_infos')
-                                                {!! Form::open(['url' => 'admin/infos/'. $info->id, 'class' => 'delete', 'style' => 'display:inline-block']) !!}
+                                            @can('delete_subscriptions')
+                                                {!! Form::open(['url' => 'admin/subscriptions/'. $subscribe->id, 'class' => 'delete', 'style' => 'display:inline-block']) !!}
                                                 {!! Form::hidden('_method', 'DELETE') !!}
                                                 {!! Form::submit('remove', ['class' => 'btn btn-danger btn-sm']) !!}
                                                 {!! Form::close() !!}
@@ -44,13 +48,14 @@
                             </tbody>
                         </table>
                         <div class="pagination-style">
-                        {{ $infos->links() }}
+                        {{ $subscriptions->links() }}
                         </div>
+                        
                     </div>
 
-                    @can('add_infos')
+                    @can('add_subscriptions')
                         <div class="card-footer text-right">
-                            <a href="{{ url('admin/infos/create') }}" class="btn btn-primary">Add New</a>
+                            <a href="{{ url('admin/subscriptions/create') }}" class="btn btn-primary">Add New</a>
                         </div>
                     @endcan
                 </div>

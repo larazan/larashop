@@ -80,8 +80,15 @@
 			<div class="col-md-12 col-lg-5 col-12">
 				<div class="product-details-content">
 					<h3>{{ $product->name }}</h3>
-					<div class="details-price">
-						<span>{{ number_format($product->priceLabel()) }}</span>
+					<div class="details-brand">
+						@foreach ($product->brands as $brand)
+						<span>
+							<a style="color:#aaa; padding-right: 5px; font-weight:bold;" href="{{ url('products?brand='. $brand->slug ) }}">{{ $brand->name }}</a>
+						</span>
+						@endforeach
+					</div>
+					<div class="details-price" >
+						<span style="color: red;">{{ number_format($product->priceLabel()) }}</span>
 					</div>
 					<p>{{ $product->short_description }}</p>
 					{!! Form::open(['url' => 'carts']) !!}
@@ -115,7 +122,7 @@
 						<ul>
 							<li class="categories-title">Categories :</li>
 							@foreach ($product->categories as $category)
-							<li><a href="{{ url('products/category/'. $category->slug ) }}">{{ $category->name }}</a></li>
+							<li><a href="{{ url('products?category='. $category->slug ) }}">{{ $category->name }}</a></li>
 							@endforeach
 						</ul>
 					</div>
@@ -183,7 +190,7 @@
 </div>
 
 
-    
+<!--     
 <div id="shopify-section-related-products" class="shopify-section">
 	<div class="product-area related_product_area">
 		<div class="container">
@@ -195,8 +202,8 @@
     		
 		</div>
 	</div>
-</div>
+</div> -->
 
-@include('themes.ezone.products.rel')
+
 			
 @endsection

@@ -51,7 +51,9 @@
                                 @endforelse
                             </tbody>
                         </table>
+                        <div class="pagination-style">
                         {{ $attributes->links() }}
+                        </div>
                     </div>
                     @can('add_attributes')
                         <div class="card-footer text-right">

@@ -49,7 +49,9 @@
                                 @endforelse
                             </tbody>
                         </table>
+                        <div class="pagination-style">
                         {{ $users->links() }}
+                        </div>
                     </div>
 
                     @can('add_users')

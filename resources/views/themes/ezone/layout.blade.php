@@ -81,56 +81,7 @@
             }
         })
     </script>
-     <script>
-        $('.arrival-active').owlCarousel({
-            loop: true,
-            autoplay: false,
-            autoplayTimeout: 5000,
-            nav: false,
-            margin: 40,
-            item: 5,
-            responsive: {
-                0: {
-                    items: 1
-                },
-                768: {
-                    items: 2
-                },
-                1000: {
-                    items: 3
-                },
-                1200: {
-                    items: 3
-                },
-                1400: {
-                    items: 5
-                }
-            }
-        })
 
-        $('.related-product-active').owlCarousel({
-        loop: true,
-        nav: false,
-        autoplay: false,
-        autoplayTimeout: 5000,
-        item: 3,
-        margin: 30,
-        responsive: {
-            0: {
-                items: 1
-            },
-            768: {
-                items: 2
-            },
-            1000: {
-                items: 3
-            },
-            1200: {
-                items: 3
-            }
-        }
-    })
-    </script>
     <script>
         // (function($) {
         //     "use strict";
@@ -152,37 +103,91 @@
         // })(jQuery);
     </script>
     <script>
-        $(function() {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            $('form.subscribe-form').on('submit', function(e) {
-                $("#submitButton").prop('disabled', true);
+        // $(function() {
+        //     $.ajaxSetup({
+        //         headers: {
+        //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        //         }
+        //     });
+        //     $('.subscribe-form').on('submit', function(e) {
+        //         $("#submitButton").prop('disabled', true);
 
-                $.ajax({
-                    type: 'POST',
-                    url: '/subscription',
-                    data: $(this).serialize(),
-                    success: function(data) {
-                        if (data.success) {
-                            $('.subscribe-section').html('<div class="alert alert-success" role="alert">Yaay, thanks for subscribe</div>');
-                        }
-                    },
-                    error: function(data) {
-                        var errorFromServer = JSON.parse(data.responseText);
-                        $("#emailField").addClass('is-invalid');
+        //         $.ajax({
+        //             type: 'POST',
+        //             url: '/subscription',
+        //             data: $(this).serialize(),
+        //             success: function(data) {
+        //                 if (data.success) {
+        //                     $('.subscribe-section').html('<div class="alert alert-success" role="alert">Yaay, thanks for subscribe</div>');
+        //                 }
+        //             },
+        //             error: function(data) {
+        //                 var errorFromServer = JSON.parse(data.responseText);
+        //                 $("#emailField").addClass('is-invalid');
 
-                        var invalidFeedbackBox = $(".invalid-feedback");
-                        invalidFeedbackBox.html(errorFromServer.message);
-                        invalidFeedbackBox.removeClass('d-none');
+        //                 var invalidFeedbackBox = $(".invalid-feedback");
+        //                 invalidFeedbackBox.html(errorFromServer.message);
+        //                 invalidFeedbackBox.removeClass('d-none');
 
-                        $("#submitButton").prop('disabled', false);
+        //                 $("#submitButton").prop('disabled', false);
+        //             }
+        //         });
+        //     });
+        // });
+    </script>
+
+    <script>
+        function checkSubscriber() {
+            var subscriber_email = $(".subscriber_email").val();
+            console.log(subscriber_email);
+            $.ajax({
+                type: 'post',
+                url: '/check-subscriber-email',
+                data: {
+                    subscriber_email: subscriber_email
+                },
+                success: function(resp) {
+                    if (resp == "exists") {
+                        // alert("Subscriber email already exist");
+                        $("#statusSubscribe").show();
+                        $("#btnSubmit").hide();
+                        $("#statusSubscribe").html("<span style='margin-top: 10px;'>&nbsp;</span><font color='red'>Error: Subscriber email already exists!</font>");
                     }
-                });
-            });
-        });
+                },
+                error: function() {
+                    alert("Error");
+                }
+            })
+        }
+
+        function addSubscriber() {
+            var subscriber_email = $(".subscriber_email").val();
+            $.ajax({
+                type: 'post',
+                url: '/add-subscriber-email',
+                data: {
+                    subscriber_email: subscriber_email
+                },
+                success: function(resp) {
+                    if (resp == "exists") {
+                        // alert("Subscriber email already exist");
+                        $("#statusSubscribe").show();
+                        $("#statusSubscribe").html("<span style='margin-top: 10px;'>&nbsp;</span><font color='red'>Error: Subscriber email already exists!</font>");
+                    } else if (resp == "saved") {
+                        $("#statusSubscribe").show();
+                        $("#statusSubscribe").html("<span style='margin-top: 10px;''>&nbsp;</span><font color='red'>Success: Thanks for subscribing!</font>");
+                    }
+                },
+                error: function() {
+                    alert("Error");
+                }
+            })
+        }
+
+        function enableSubscriber() {
+            $("#statusSubscribe").hide();
+            $("#btnSubmit").show();
+        }
     </script>
 
 </body>
