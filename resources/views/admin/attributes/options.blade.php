@@ -19,9 +19,12 @@
                                 <th style="width:30%">Action</th>
                             </thead>
                             <tbody>
+                            @php
+                                $i = 1
+                                @endphp
                                 @forelse ($attribute->attributeOptions as $option)
                                     <tr>    
-                                        <td>{{ $option->id }}</td>
+                                        <td>{{ $i++ }}</td>
                                         <td>{{ $option->name }}</td>
                                         <td>
                                             @can('edit_attributes')

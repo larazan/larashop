@@ -28,7 +28,7 @@ class BrandController extends Controller
      */
     public function index()
     {
-        $this->data['brands'] = Brand::orderBy('name', 'ASC')->paginate(10);
+        $this->data['brands'] = Brand::orderBy('name', 'DESC')->paginate(10);
 
         return view('admin.brands.index', $this->data);
     }

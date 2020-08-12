@@ -12,12 +12,12 @@ class PostController extends Controller
 		parent::__construct();
 
 		$limit = 5;
-        $this->data['articles'] = Post::active()->limit($limit)->get();
+        $this->data['articles'] = Post::active()->orderBy('id', 'DESC')->limit($limit)->get();
 	}
     
     public function index(Request $request)
 	{
-		$posts = Post::active();
+		$posts = Post::active()->orderBy('id', 'DESC');
 
 		// build breadcrumb data array
 		$breadcrumbs_data['current_page_title'] = '';
@@ -37,6 +37,9 @@ class PostController extends Controller
 		}
 
 		$this->data['post'] = $post;
+
+		$limit = 5;
+        $this->data['articles'] = Post::active()->where('slug', '!=', $slug)->orderBy('id', 'DESC')->limit($limit)->get();
 
 		// build breadcrumb data array
 		$breadcrumbs_data['current_page_title'] = $post->title;

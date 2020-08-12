@@ -19,9 +19,12 @@
                                 <th>Action</th>
                             </thead>
                             <tbody>
+                            @php
+                                $i = 1
+                                @endphp
                                 @forelse ($categories as $category)
                                     <tr>    
-                                        <td>{{ $category->id }}</td>
+                                        <td>{{ $i++ }}</td>
                                         <td>{{ $category->name }}</td>
                                         <td>{{ $category->slug }}</td>
                                         <td>{{ $category->parent ? $category->parent->name : '' }}</td>

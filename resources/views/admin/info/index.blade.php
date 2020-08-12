@@ -18,9 +18,12 @@
                                 <th>Action</th>
                             </thead>
                             <tbody>
+                            @php
+                                $i = 1
+                                @endphp
                                 @forelse ($infos as $info)
                                     <tr>    
-                                        <td>{{ $info->id }}</td>
+                                        <td>{{ $i++ }}</td>
                                         <td>{{ ucwords($info->type) }}</td>  
                                         <!-- <td>{{ substr(strip_tags($info->body), 0, 200) }}...</td>                                      -->
                                         <td>

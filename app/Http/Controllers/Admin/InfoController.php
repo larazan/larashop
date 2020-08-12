@@ -27,7 +27,7 @@ class InfoController extends Controller
      */
     public function index()
     {
-        $this->data['infos'] = Info::orderBy('id', 'ASC')->paginate(10);
+        $this->data['infos'] = Info::orderBy('id', 'DESC')->paginate(10);
 
 		return view('admin.info.index', $this->data);
     }

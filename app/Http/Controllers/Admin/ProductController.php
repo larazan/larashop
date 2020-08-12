@@ -48,7 +48,7 @@ class ProductController extends Controller
 	 */
 	public function index()
 	{
-		$this->data['products'] = Product::orderBy('name', 'ASC')->paginate(10);
+		$this->data['products'] = Product::orderBy('name', 'DESC')->paginate(10);
 
 		return view('admin.products.index', $this->data);
 	}
@@ -60,7 +60,7 @@ class ProductController extends Controller
 	 */
 	public function create()
 	{
-		$categories = Category::orderBy('name', 'ASC')->get();
+		$categories = Category::orderBy('name', 'DESC')->get();
 		$brands = Brand::pluck('name', 'id');
 		$configurableAttributes = $this->_getConfigurableAttributes();
 
@@ -250,7 +250,7 @@ class ProductController extends Controller
 		$product = Product::findOrFail($id);
 		$product->qty = isset($product->productInventory) ? $product->productInventory->qty : null;
 
-		$categories = Category::orderBy('name', 'ASC')->get();
+		$categories = Category::orderBy('name', 'DESC')->get();
 		$brands = Brand::pluck('name', 'id');
 
 		$this->data['categories'] = $categories->toArray();

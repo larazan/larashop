@@ -23,7 +23,7 @@ class Post extends Model
 	];
 
 	public const EXTRA_LARGE = '1920x643';
-	public const SMALL = '135x75';
+	public const SMALL = '110x82';
 
 	public function scopeActive($query)
 	{

@@ -36,7 +36,7 @@ class AttributeController extends Controller
      */
     public function index()
     {
-        $this->data['attributes'] = Attribute::orderBy('name', 'ASC')->paginate(10);
+        $this->data['attributes'] = Attribute::orderBy('name', 'DESC')->paginate(10);
 
         return view('admin.attributes.index', $this->data);
     }

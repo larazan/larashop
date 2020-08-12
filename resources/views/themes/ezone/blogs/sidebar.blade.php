@@ -4,7 +4,7 @@
     <div class="sidebar-top-rated mb-30">
         <div class="single-top-rated">
             <div class="top-rated-img">
-            <a href="{{ url('blog/'. $article->slug) }}"><img src="./Ezone - eCommerce HTML5 Template blog_files/4(1).jpg" alt=""></a>
+            <a href="{{ url('blog/'. $article->slug) }}"><img src="{{ asset('storage/'.$article->small) }}" alt=""></a>
             </div>
             <div class="top-rated-text">
                 <span>{{ date('M j, Y', strtotime($article->created_at)) }}</span>

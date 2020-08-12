@@ -19,9 +19,12 @@
                                 <th>Action</th>
                             </thead>
                             <tbody>
+                                @php
+                                $i = 1
+                                @endphp
                                 @forelse ($attributes as $attribute)
                                     <tr>    
-                                        <td>{{ $attribute->id }}</td>
+                                        <td>{{ $i++ }}</td>
                                         <td>{{ $attribute->code }}</td>
                                         <td>{{ $attribute->name }}</td>
                                         <td>{{ $attribute->type }}</td>

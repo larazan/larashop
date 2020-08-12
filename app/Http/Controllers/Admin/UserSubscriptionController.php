@@ -24,7 +24,7 @@ class UserSubscriptionController extends Controller
      */
     public function index()
     {
-        $this->data['subscriptions'] = Subscription::orderBy('id', 'ASC')->paginate(10);
+        $this->data['subscriptions'] = Subscription::orderBy('id', 'DESC')->paginate(10);
 
         return view('admin.subscriptions.index', $this->data);
     }

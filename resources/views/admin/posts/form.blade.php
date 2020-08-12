@@ -29,7 +29,7 @@
 					@if (empty($post))
 						<div class="form-group">
 							{!! Form::label('image', 'Post Image (1920x643 pixel)') !!}
-							{!! Form::file('image', ['class' => 'form-control-file', 'placeholder' => 'product image']) !!}
+							{!! Form::file('featured_img', ['class' => 'form-control-file', 'placeholder' => 'post image']) !!}
 						</div>
 					@endif
 						<div class="form-group">

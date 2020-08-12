@@ -20,9 +20,12 @@
                                 <th>Action</th>
                             </thead>
                             <tbody>
+                            @php
+                                $i = 1
+                                @endphp
                                 @forelse ($slides as $slide)
                                     <tr>    
-                                        <td>{{ $slide->id }}</td>
+                                    <td>{{ $i++ }}</td>
                                         <td>{{ $slide->title }}</td>
                                         <td><img src="{{ asset('storage/'. $slide->small) }}" /></td>
                                         <td>

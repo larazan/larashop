@@ -19,9 +19,12 @@
                                 <th>Action</th>
                             </thead>
                             <tbody>
+                            @php
+                                $i = 1
+                                @endphp
                                 @forelse ($articles as $article)
                                     <tr>    
-                                        <td>{{ $article->id }}</td>
+                                        <td>{{ $i++ }}</td>
                                         <td>{{ $article->title }}</td>
                                         <td><img src="{{ asset('storage/'. $article->small) }}" /></td>
                                        

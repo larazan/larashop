@@ -35,7 +35,7 @@ class SlideController extends Controller
 	 */
 	public function index()
 	{
-		$this->data['slides'] = Slide::orderBy('position', 'ASC')->paginate(10);
+		$this->data['slides'] = Slide::orderBy('position', 'DESC')->paginate(10);
 
 		return view('admin.slides.index', $this->data);
 	}

@@ -9295,6 +9295,9 @@ a.bundle-btn {
 .blog-meta-2 ul li a:hover {
     color: #85bd02;
 }
+.blog-img {
+    margin-bottom: 22px;
+}
 .blog-img-2 a img {
     width: 100%;
 }

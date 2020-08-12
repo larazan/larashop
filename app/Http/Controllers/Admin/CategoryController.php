@@ -30,7 +30,7 @@ class CategoryController extends Controller
     public function index()
     {
         //
-        $this->data['categories'] = Category::orderBy('name', 'ASC')->paginate(10);
+        $this->data['categories'] = Category::orderBy('name', 'DESC')->paginate(10);
 
         return view('admin.categories.index', $this->data);
     }
@@ -43,7 +43,7 @@ class CategoryController extends Controller
     public function create()
     {
         //
-        $categories = Category::orderBy('name', 'asc')->get();
+        $categories = Category::orderBy('name', 'DESC')->get();
 
         $this->data['categories'] = $categories->toArray();
         $this->data['category'] = null;
@@ -91,7 +91,7 @@ class CategoryController extends Controller
     {
         //
         $category = Category::findOrFail($id);
-        $categories = Category::where('id', '!=', $id)->orderBy('name', 'asc')->get();
+        $categories = Category::where('id', '!=', $id)->orderBy('name', 'DESC')->get();
 
         $this->data['categories'] = $categories->toArray();
         $this->data['category'] = $category;

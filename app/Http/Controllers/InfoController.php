@@ -12,7 +12,7 @@ class InfoController extends Controller
 	{
 		parent::__construct();
 
-		$this->data['informations'] = Info::orderBy('id', 'ASC')->get();
+		$this->data['informations'] = Info::orderBy('id', 'DESC')->get();
 	}
 
     public function show($slug)

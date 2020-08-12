@@ -19,9 +19,12 @@
                                 <th>Action</th>
                             </thead>
                             <tbody>
+                                @php
+                                $i = 1
+                                @endphp
                                 @forelse ($brands as $brand)
                                     <tr>    
-                                        <td>{{ $brand->id }}</td>
+                                        <td>{{ $i++ }}</td>
                                         <td>{{ $brand->name }}</td>
                                         <td><img src="{{ asset('storage/'. $brand->small) }}" /></td>
                                         <td>{{ $brand->status }}</td>
@@ -43,6 +46,7 @@
                                         <td colspan="6">No records found</td>
                                     </tr>
                                 @endforelse
+                                
                             </tbody>
                         </table>
                         <div class="pagination-style">

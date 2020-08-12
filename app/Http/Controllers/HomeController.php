@@ -28,10 +28,10 @@ class HomeController extends Controller
         $limit = 10;
 		// $products = Product::popular()->get();
         // $this->data['products'] = $products;
-        $products = Product::active()->limit($limit)->get();
+        $products = Product::active()->orderBy('id', 'DESC')->limit($limit)->get();
         $this->data['products'] = $products;
 
-		$slides = Slide::active()->orderBy('position', 'ASC')->get();
+		$slides = Slide::active()->orderBy('position', 'DESC')->get();
         $this->data['slides'] = $slides;
         
         // $this->data['hoax'] = '';

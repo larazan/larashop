@@ -20,9 +20,12 @@
                                 <th>Action</th>
                             </thead>
                             <tbody>
+                            @php
+                                $i = 1
+                                @endphp
                                 @forelse ($subscriptions as $subscribe)
                                     <tr>    
-                                        <td>{{ $subscribe->id }}</td>
+                                    <td>{{ $i++ }}</td>
                                         <td>{{ $subscribe->email }}</td>
                                        
                                         <td>{{ $subscribe->status }}</td>

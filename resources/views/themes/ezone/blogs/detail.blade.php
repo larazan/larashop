@@ -26,7 +26,7 @@
                         </ul>
                     </div>
                     <h3>{{ $post->title }}</h3>
-                    <img src="./Ezone - eCommerce HTML5 Template blog detail_files/13.jpg" alt="">
+                    <img src="{{ asset('storage/'.$post->featured_img) }}" alt="">
                     <p>{{ $post->body }}</p>
                 </div>
                 

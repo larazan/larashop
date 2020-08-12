@@ -53,12 +53,12 @@
                         <div class="col-lg-6 col-md-6 grid-item" style="position: absolute; left: 0%; top: 0px;">
                             <div class="blog-wrapper mb-40">
                                 <div class="blog-img">
-                                    <a href="{{ url('blog/'. $post->slug) }}"><img src="./Ezone - eCommerce HTML5 Template blog_files/4(1).jpg" alt=""></a>
+                                    <a href="{{ url('blog/'. $post->slug) }}"><img src="{{ asset('storage/'.$post->featured_img) }}" alt=""></a>
                                 </div>
                                 <div class="blog-info-wrapper">
                                     <div class="blog-meta">
                                         <ul>
-                                            
+                                            <li>Admin</li>
                                             <li>{{ date('M j, Y', strtotime($post->created_at)) }}</li>
                                         </ul>
                                     </div>

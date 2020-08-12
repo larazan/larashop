@@ -36,10 +36,10 @@ class ProductController extends Controller
 
 		$this->data['q'] = null;
 
-		$this->data['brands'] = Brand::orderBy('id', 'ASC')->get();
+		$this->data['brands'] = Brand::orderBy('id', 'DESC')->get();
 
 		$this->data['categories'] = Category::parentCategories()
-			->orderBy('name', 'asc')
+			->orderBy('name', 'DESC')
 			->get();
 		
 		$this->data['minPrice'] = Product::min('price');
@@ -52,7 +52,7 @@ class ProductController extends Controller
 						->where('is_filterable', 1);
 			}
 		)
-		->orderBy('name', 'asc')->get();
+		->orderBy('name', 'DESC')->get();
 
 		$this->data['sizes'] = AttributeOption::whereHas(
 			'attribute',
@@ -60,14 +60,14 @@ class ProductController extends Controller
 				$query->where('code', 'size')
 					->where('is_filterable', 1);
 			}
-		)->orderBy('name', 'asc')->get();
+		)->orderBy('name', 'DESC')->get();
 								
 		$this->data['sorts'] = [
 			url('products') => 'Default',
-			url('products?sort=price-asc') => 'Price - Low to High',
+			url('products?sort=price-DESC') => 'Price - Low to High',
 			url('products?sort=price-desc') => 'Price - High to Low',
 			url('products?sort=created_at-desc') => 'Newest to Oldest',
-			url('products?sort=created_at-asc') => 'Oldest to Newest',
+			url('products?sort=created_at-DESC') => 'Oldest to Newest',
 		];
 
 		$this->data['selectedSort'] = url('products');
@@ -82,7 +82,7 @@ class ProductController extends Controller
 	 */
 	public function index(Request $request)
 	{
-		$products = Product::active();
+		$products = Product::active()->orderBy('id', 'DESC');
 
 		$products = $this->_searchProducts($products, $request);
 		$products = $this->_filterProductsByPriceRange($products, $request);
@@ -221,7 +221,7 @@ class ProductController extends Controller
 	{
 		if ($sort = preg_replace('/\s+/', '', $request->query('sort'))) {
 			$availableSorts = ['price', 'created_at'];
-			$availableOrder = ['asc', 'desc'];
+			$availableOrder = ['DESC', 'desc'];
 			$sortAndOrder = explode('-', $sort);
 
 			$sortBy = strtolower($sortAndOrder[0]);

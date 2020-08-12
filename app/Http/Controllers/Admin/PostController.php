@@ -11,6 +11,7 @@ use App\Models\Permission;
 use App\Authorizable;
 
 use Session;
+use Str;
 
 class PostController extends Controller
 {
@@ -32,7 +33,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $this->data['articles'] = Post::orderBy('id', 'ASC')->paginate(10);
+        $this->data['articles'] = Post::orderBy('id', 'DESC')->paginate(10);
 
 		return view('admin.posts.index', $this->data);
     }
@@ -70,14 +71,13 @@ class PostController extends Controller
 
 		$resizedImage = $this->_resizeImage($image, $fileName, $folder);
 
-		$params['original'] = $filePath;
-		$params['extra_large'] = $resizedImage['extra_large'];
+		$params['featured_img'] = $filePath;
+		// $params['extra_large'] = $resizedImage['extra_large'];
 		$params['small'] = $resizedImage['small'];
-		$params['user_id'] = \Auth::user()->id;
+		// $params['user_id'] = \Auth::user()->id;
 
 		unset($params['image']);
 
-		$params['position'] = Post::max('position') + 1;
 
 		if (Post::create($params)) {
 			\Session::flash('success', 'Article has been created');

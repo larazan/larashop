@@ -107,7 +107,7 @@ class ReportController extends Controller
 		 FROM date_ranges DR
 		 LEFT JOIN filtered_orders FO ON DATE(order_date) = DR.date
 		 GROUP BY DR.date
-		 ORDER BY DR.date ASC";
+		 ORDER BY DR.date DESC";
 
 		$revenues = \DB::select(
 			\DB::raw($sql),
@@ -263,7 +263,7 @@ class ReportController extends Controller
 			PI.qty as stock
 		FROM product_inventories PI
 		LEFT JOIN products P ON P.id = PI.product_id
-		ORDER BY stock ASC
+		ORDER BY stock DESC
 		";
 
 		$products = \DB::select(\DB::raw($sql));

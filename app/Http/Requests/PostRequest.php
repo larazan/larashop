@@ -30,7 +30,7 @@ class PostRequest extends FormRequest
 		];
 
 		if ($this->method() == 'POST') {
-			$rules['featured_img'] = 'required|image|mimes:jpeg,png,jpg,gif|max:4096';
+			$rules['featured_img'] = 'required|image|max:4096';
 		}
 
 		return $rules;
