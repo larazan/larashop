@@ -492,10 +492,40 @@ class ProductController extends Controller
 	{
 		$image = ProductImage::findOrFail($id);
 
+		// delete image
+		$this->deleteImage($id);
+
 		if ($image->delete()) {
 			Session::flash('success', 'Image has been deleted');
 		}
 
 		return redirect('admin/products/' . $image->product->id . '/images');
 	}
+
+	public function deleteImage($id = null) {
+        $productImage = ProductImage::where(['id' => $id])->first();
+		$path = 'storage/';
+		
+        if (file_exists($path.$productImage->path)) {
+            unlink($path.$productImage->path);
+		}
+		
+		if (file_exists($path.$productImage->extra_large)) {
+            unlink($path.$productImage->extra_large);
+        }
+
+        if (file_exists($path.$productImage->large)) {
+            unlink($path.$productImage->large);
+		}
+		
+		if (file_exists($path.$productImage->medium)) {
+            unlink($path.$productImage->medium);
+        }
+
+        if (file_exists($path.$productImage->small)) {
+            unlink($path.$productImage->small);
+        }
+
+        return true;
+    }
 }

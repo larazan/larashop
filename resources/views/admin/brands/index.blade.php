@@ -26,7 +26,7 @@
                                     <tr>    
                                         <td>{{ $i++ }}</td>
                                         <td>{{ $brand->name }}</td>
-                                        <td><img src="{{ asset('storage/'. $brand->small) }}" /></td>
+                                        <td><img src="{{ asset('storage/'. $brand->original) }}" /></td>
                                         <td>{{ $brand->status }}</td>
                                         <td>
                                             @can('edit_brands')

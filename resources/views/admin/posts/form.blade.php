@@ -26,12 +26,17 @@
 							{!! Form::text('title', null, ['class' => 'form-control']) !!}
 						</div>
 						
-					@if (empty($post))
+					
 						<div class="form-group">
 							{!! Form::label('image', 'Post Image (1920x643 pixel)') !!}
+							@if (!empty($post))
+							<div style="width:fit-content; border: 1px solid grey; padding: 5px; margin: 10px 10px 10px 0;">
+								<img src="{{ asset('storage/'. $post->small) }}" />
+							</div>
+							@endif
 							{!! Form::file('featured_img', ['class' => 'form-control-file', 'placeholder' => 'post image']) !!}
 						</div>
-					@endif
+					
 						<div class="form-group">
 							{!! Form::label('body', 'Body') !!}
 							{!! Form::textarea('body', null, ['class' => 'form-control', 'rows' => 3, 'id' => 'editor']) !!}

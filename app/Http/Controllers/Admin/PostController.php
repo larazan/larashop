@@ -151,12 +151,50 @@ class PostController extends Controller
         $params = $request->except('_token');
         $params['slug'] = Str::slug($params['title']);
 
+        $image = $request->file('featured_img');
+        
+        if ($image) {
+        
+            // delete image
+            $this->deleteImage($id);
+        
+            $name = \Str::slug($params['title']) . '_' . time();
+            $fileName = $name . '.' . $image->getClientOriginalExtension();
+
+            $folder = Post::UPLOAD_DIR. '/images';
+
+            $filePath = $image->storeAs($folder . '/original', $fileName, 'public');
+
+            $resizedImage = $this->_resizeImage($image, $fileName, $folder);
+
+            $params['featured_img'] = $filePath;
+            // $params['extra_large'] = $resizedImage['extra_large'];
+            $params['small'] = $resizedImage['small'];
+            // $params['user_id'] = \Auth::user()->id;
+
+            // unset($params['image']);
+        }
+		
 		$post = Post::findOrFail($id);
 		if ($post->update($params)) {
 			\Session::flash('success', 'Post has been updated.');
 		}
 
 		return redirect('admin/posts');
+    }
+
+    public function deleteImage($id = null) {
+        $postImage = Post::where(['id' => $id])->first();
+        $path = 'storage/';
+        if (file_exists($path.$postImage->featured_img)) {
+            unlink($path.$postImage->featured_img);
+        }
+
+        if (file_exists($path.$postImage->small)) {
+            unlink($path.$postImage->small);
+        }
+
+        return true;
     }
 
     /**
@@ -168,6 +206,8 @@ class PostController extends Controller
     public function destroy($id)
     {
         $post  = Post::findOrFail($id);
+        // delete image
+        $this->deleteImage($id);
 
 		if ($post->delete()) {
 			\Session::flash('success', 'Post has been deleted');

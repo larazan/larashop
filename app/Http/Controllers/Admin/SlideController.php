@@ -219,6 +219,31 @@ class SlideController extends Controller
 	{
 		$params = $request->except('_token');
 
+		$image = $request->file('image');
+		
+		if ($image) {
+
+			// delete image
+			$this->deleteImage($id);
+			
+			$name = \Str::slug($params['title']) . '_' . time();
+			$fileName = $name . '.' . $image->getClientOriginalExtension();
+
+			$folder = Slide::UPLOAD_DIR. '/images';
+
+			$filePath = $image->storeAs($folder . '/original', $fileName, 'public');
+
+			$resizedImage = $this->_resizeImage($image, $fileName, $folder);
+
+			$params['original'] = $filePath;
+			$params['extra_large'] = $resizedImage['extra_large'];
+			$params['small'] = $resizedImage['small'];
+			$params['user_id'] = \Auth::user()->id;
+
+			unset($params['image']);
+		}
+		
+
 		$slide = Slide::findOrFail($id);
 		if ($slide->update($params)) {
 			\Session::flash('success', 'Slide has been updated.');
@@ -226,6 +251,40 @@ class SlideController extends Controller
 
 		return redirect('admin/slides');
 	}
+
+	public function tes() {
+		$id = 1;
+		$slideImage = Slide::where(['id' => $id])->first();
+		$path = 'storage/';
+		$img = 'uploads/images/baju-muslim-lengan-panjang_1595374676.jpg';
+        if (file_exists($path.$slideImage->original)) {
+            echo $path.$slideImage->original;
+		}
+
+		if (file_exists($path.$img)) {
+			// echo $path.$img;
+			unlink($path.$img);
+		}
+	}
+
+	public function deleteImage($id = null) {
+        $slideImage = Slide::where(['id' => $id])->first();
+		$path = 'storage/';
+		
+        if (file_exists($path.$slideImage->original)) {
+            unlink($path.$slideImage->original);
+		}
+		
+		if (file_exists($path.$slideImage->extra_large)) {
+            unlink($path.$slideImage->extra_large);
+        }
+
+        if (file_exists($path.$slideImage->small)) {
+            unlink($path.$slideImage->small);
+        }
+
+        return true;
+    }
 
 	/**
 	 * Remove the specified resource from storage.
@@ -237,6 +296,9 @@ class SlideController extends Controller
 	public function destroy($id)
 	{
 		$slide  = Slide::findOrFail($id);
+
+		// delete image
+		$this->deleteImage($id);
 
 		if ($slide->delete()) {
 			\Session::flash('success', 'Slide has been deleted');

@@ -26,12 +26,15 @@
 							{!! Form::text('name', null, ['class' => 'form-control']) !!}
 						</div>
 						
-					@if (empty($brand))
 						<div class="form-group">
 							{!! Form::label('image', 'brand Image (1920x643 pixel)') !!}
+							@if (!empty($brand))
+							<div style="width:fit-content; border: 1px solid grey; padding: 5px; margin: 10px 10px 10px 0;">
+								<img src="{{ asset('storage/'. $brand->original) }}" />
+							</div>
+							@endif
 							{!! Form::file('image', ['class' => 'form-control-file', 'placeholder' => 'product image']) !!}
 						</div>
-					@endif
 						
 						<div class="form-group">
 							{!! Form::label('status', 'Status') !!}

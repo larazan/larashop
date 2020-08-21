@@ -66,12 +66,11 @@ class BrandController extends Controller
 
             $filePath = $image->storeAs($folder . '/original', $fileName, 'public');
 
-            $resizedImage = $this->_resizeImage($image, $fileName, $folder);
+            // $resizedImage = $this->_resizeImage($image, $fileName, $folder);
 
             $params['original'] = $filePath;
-            $params['extra_large'] = $resizedImage['extra_large'];
-            $params['small'] = $resizedImage['small'];
-            $params['user_id'] = \Auth::user()->id;
+            // $params['extra_large'] = $resizedImage['extra_large'];
+            // $params['small'] = $resizedImage['small'];
 
             unset($params['image']);
         }
@@ -83,6 +82,25 @@ class BrandController extends Controller
 		}
 
 		return redirect('admin/brands');
+    }
+
+    public function deleteImage($id = null) {
+        $brandImage = Brand::where(['id' => $id])->first();
+		$path = 'storage/';
+		
+        if (file_exists($path.$brandImage->original)) {
+            unlink($path.$brandImage->original);
+		}
+		
+		// if (file_exists($path.$brandImage->extra_large)) {
+        //     unlink($path.$brandImage->extra_large);
+        // }
+
+        // if (file_exists($path.$brandImage->small)) {
+        //     unlink($path.$brandImage->small);
+        // }
+
+        return true;
     }
 
     /**
@@ -122,6 +140,25 @@ class BrandController extends Controller
     {
         $params = $request->except('_token');
 
+        $image = $request->file('image');
+		
+		if ($image) {
+
+			// delete image
+			$this->deleteImage($id);
+			
+            $name = \Str::slug($params['name']) . '_' . time();
+            $fileName = $name . '.' . $image->getClientOriginalExtension();
+
+            $folder = Brand::UPLOAD_DIR. '/images';
+
+            $filePath = $image->storeAs($folder . '/original', $fileName, 'public');
+
+			$params['original'] = $filePath;
+
+			unset($params['image']);
+		}
+
 		$brand = Brand::findOrFail($id);
 		if ($brand->update($params)) {
 			\Session::flash('success', 'Brand has been updated.');
@@ -139,6 +176,9 @@ class BrandController extends Controller
     public function destroy($id)
     {
         $brand  = Brand::findOrFail($id);
+
+        // delete image
+		$this->deleteImage($id);
 
 		if ($brand->delete()) {
 			\Session::flash('success', 'Brand has been deleted');

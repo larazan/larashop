@@ -29,12 +29,17 @@
 							{!! Form::label('url', 'URL') !!}
 							{!! Form::text('url', null, ['class' => 'form-control']) !!}
 						</div>
-					@if (empty($slide))
+					
 						<div class="form-group">
 							{!! Form::label('image', 'Slide Image (1920x643 pixel)') !!}
+							@if (!empty($slide))
+							<div style="width:fit-content; border: 1px solid grey; padding: 5px; margin: 10px 10px 10px 0;">
+								<img src="{{ asset('storage/'. $slide->small) }}" />
+							</div>
+							@endif
 							{!! Form::file('image', ['class' => 'form-control-file', 'placeholder' => 'product image']) !!}
 						</div>
-					@endif
+					
 						<div class="form-group">
 							{!! Form::label('body', 'Body') !!}
 							{!! Form::textarea('body', null, ['class' => 'form-control', 'rows' => 3]) !!}

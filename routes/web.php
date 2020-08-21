@@ -106,6 +106,8 @@ Route::group(
 		Route::resource('brands', 'BrandController');
 
 		Route::resource('subscriptions', 'UserSubscriptionController');
+
+		Route::get('tes', 'SlideController@tes');
 	}
 );
 
