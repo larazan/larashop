@@ -8,10 +8,10 @@
 </p>
 
 ## Screencast
-<iframe width="560" height="315" src="https://www.youtube.com/embed/fphj7YlyX98" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+https://www.youtube.com/watch?v=fphj7YlyX98&ab_channel=purunjamu
 <br />
 <hr>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/qEJoIM70KZA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+https://www.youtube.com/watch?v=qEJoIM70KZA&ab_channel=purunjamu
 
 
 ## About Laravel
