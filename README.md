@@ -8,10 +8,10 @@
 </p>
 
 ## Screencast
-[<img src="https://img.youtube.com/vi/fphj7YlyX98/maxresdefault.jpg" width="50%">](https://youtube.com/fphj7YlyX98)
-<br />
+[![Larashop Proses chekout](https://img.youtube.com/vi/fphj7YlyX98/0.jpg)](https://www.youtube.com/watch?v=fphj7YlyX98)
+<br>
 <hr>
-[<img src="https://img.youtube.com/vi/qEJoIM70KZA/maxresdefault.jpg" width="50%">](https://youtu.be/qEJoIM70KZA)
+[![Larashop proses pembayaran](https://img.youtube.com/vi/qEJoIM70KZA/0.jpg)](https://www.youtube.com/watch?v=qEJoIM70KZA)
 
 ## About Laravel
 
