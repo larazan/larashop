@@ -9,7 +9,8 @@
 
 ## Screencast
 [![Larashop Proses chekout](https://img.youtube.com/vi/fphj7YlyX98/0.jpg)](https://www.youtube.com/watch?v=fphj7YlyX98)
-<hr>
+
+## Proses Chekout
 [![Larashop proses pembayaran](https://img.youtube.com/vi/qEJoIM70KZA/0.jpg)](https://www.youtube.com/watch?v=qEJoIM70KZA)
 
 ## About Laravel
