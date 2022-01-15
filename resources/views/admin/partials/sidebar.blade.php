@@ -25,7 +25,7 @@
 					<ul  class="collapse  {{ ($currentAdminMenu == 'catalog') ? 'show' : ''}}"  id="catalog"
 						data-parent="#sidebar-menu">
 						<div class="sub-menu">
-							<li  class="{{ ($currentAdminSubMenu == 'product') ? 'active' : ''}}">
+							<li  class="{{ ($currentAdminMenu == 'catalog') ? 'show' : ''}}">
 								<a class="sidenav-item-link" href="{{ url('admin/products')}}">
 								<span class="nav-text">Products</span>
 								</a>

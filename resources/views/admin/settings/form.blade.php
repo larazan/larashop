@@ -8,11 +8,11 @@
 		<div class="col-lg-6">
 			<div class="card card-default">
 				<div class="card-header card-header-border-bottom">
-						<h2> Settings</h2>
+						<h2> Settings</h2> {{ set('system_name') }}
 				</div>
 				<div class="card-body">
 					@include('admin.partials.flash', ['$errors' => $errors])
-						{!! Form::open(['url' => 'admin/settings', 'method' => 'PUT', 'enctype' => 'multipart/form-data']) !!}
+						{!! Form::open(['url' => 'admin/settings/update', 'method' => 'PUT', 'enctype' => 'multipart/form-data']) !!}
 					
 						<div class="form-group">
 							{!! Form::label('name', 'System name') !!}
@@ -31,8 +31,8 @@
 							{!! Form::text('address', $address, ['class' => 'form-control']) !!}
 						</div>
 						<div class="form-group">
-							{!! Form::label('sekilas', 'Sekilas') !!}
-							{!! Form::textarea('sekilas', $sekilas, ['class' => 'form-control', 'rows' => 3]) !!}
+							{!! Form::label('info', 'Info') !!}
+							{!! Form::textarea('info', $info, ['class' => 'form-control', 'rows' => 3]) !!}
 						</div>
 						<div class="form-group">
 							{!! Form::label('map', 'Map') !!}

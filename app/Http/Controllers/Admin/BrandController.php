@@ -73,6 +73,8 @@ class BrandController extends Controller
             // $params['small'] = $resizedImage['small'];
 
             unset($params['image']);
+        } else {
+            $params['original'] = null;
         }
 
 		if (Brand::create($params)) {

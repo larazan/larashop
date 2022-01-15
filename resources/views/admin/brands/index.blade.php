@@ -53,12 +53,11 @@
                         {{ $brands->links() }}
                         </div>
                     </div>
-
-                    @can('add_brands')
+                    
                         <div class="card-footer text-right">
                             <a href="{{ url('admin/brands/create') }}" class="btn btn-primary">Add New</a>
                         </div>
-                    @endcan
+                        
                 </div>
             </div>
         </div>
