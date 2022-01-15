@@ -8,7 +8,7 @@
 </p>
 
 ## Screencast
-[<img src="https://img.youtube.com/vi/fphj7YlyX98/maxresdefault.jpg" width="50%">](https://youtu.be/fphj7YlyX98)
+[<img src="https://img.youtube.com/vi/fphj7YlyX98/maxresdefault.jpg" width="50%">](https://youtube.com/fphj7YlyX98)
 <br />
 <hr>
 [<img src="https://img.youtube.com/vi/qEJoIM70KZA/maxresdefault.jpg" width="50%">](https://youtu.be/qEJoIM70KZA)
