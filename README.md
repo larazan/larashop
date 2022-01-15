@@ -8,11 +8,10 @@
 </p>
 
 ## Screencast
-https://www.youtube.com/watch?v=fphj7YlyX98&ab_channel=purunjamu
+[<img src="https://img.youtube.com/vi/fphj7YlyX98/maxresdefault.jpg" width="50%">](https://youtu.be/fphj7YlyX98)
 <br />
 <hr>
-https://www.youtube.com/watch?v=qEJoIM70KZA&ab_channel=purunjamu
-
+[<img src="https://img.youtube.com/vi/qEJoIM70KZA/maxresdefault.jpg" width="50%">](https://youtu.be/qEJoIM70KZA)
 
 ## About Laravel
 
